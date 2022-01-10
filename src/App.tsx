@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 
 const App = props => (
 <div>
-    <p style="text-align:center;"><img src={logo} className="App-logo" alt="logo" /></p>
+    <img src={logo} className="App-logo" alt="logo" />
     <LoginForm />
 </div>
 );
@@ -60,8 +60,8 @@ const FormButton = props => (
     .addEventListener("click", loginClicked);*/
 
 const FormInput = props => (
-  <div class="row">
-    <label>{props.description}</label>
+  <div className="row">
+    <label >{props.description}</label>
     <input type={props.type} placeholder={props.placeholder}/>
   </div>
 );
