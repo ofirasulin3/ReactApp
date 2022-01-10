@@ -5,12 +5,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 
-const App = props => (
+/*const App = props => (
 <div>
     <img src={logo} className="App-logo" alt="logo" />
-    <LoginForm />
+    <LoginForm  />
 </div>
-);
+);*/
+
+function App() {
+    const [click, setClick] = React.useState(0);
+    console.log('I render 😡', click);
+    return (
+        /*<div>
+            <button onClick={() => setClick(click => click + 1)}>
+                Clicks: {click}
+            </button>
+        </div>*/
+        <div >
+            <img src={logo} className="App-logo" alt="logo" />
+            <LoginForm />
+        </div>
+    )
+}
 
 
 class LoginForm extends React.Component{
@@ -51,7 +67,7 @@ const loginClicked = () => {
 }
 
 const FormButton = props => (
-  <div id="button" class="row">
+  <div id="button" className="row">
     <button onClick={loginClicked}>{props.title}</button>
   </div>
 );
@@ -66,10 +82,10 @@ const FormInput = props => (
   </div>
 );
 
-ReactDOM.render(
+/*ReactDOM.render(
     <App />,
     document.getElementById('container')
-);
+);*/
 
 export default App;
 

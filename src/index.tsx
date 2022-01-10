@@ -5,9 +5,7 @@ import App from './App.tsx';
 import reportWebVitals from './reportWebVitals.tsx';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <App />,
   document.getElementById('root')
 );
 
