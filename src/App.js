@@ -1,4 +1,4 @@
-//import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 
 import React from 'react';
@@ -6,7 +6,10 @@ import ReactDOM from 'react-dom';
 
 
 const App = props => (
+<div>
+    <p style="text-align:center;"><img src={logo} className="App-logo" alt="logo" /></p>
     <LoginForm />
+</div>
 );
 
 
