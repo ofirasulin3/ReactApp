@@ -1,8 +1,9 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 
 const App = props => (
     <LoginForm />
@@ -10,13 +11,23 @@ const App = props => (
 
 
 class LoginForm extends React.Component{
+//  const [title, setTitle] = React.useState<string>("Title");
+
   render(){
+
+    /*return(
+      <div>
+        <FormHeader title="Loggedin!!" />
+      </div>
+    )*/
+
     return(
       <div id="loginform">
         <FormHeader title="Admin Login" />
         <Form />
       </div>
     )
+
   }
 }
 
@@ -31,12 +42,19 @@ const Form = props => (
      <FormButton title="Log in"/>
    </div>
 );
+const loginClicked = () => {
+    console.log("login clickeddddd");
+    //this.logged_in = 1;
+}
 
 const FormButton = props => (
   <div id="button" class="row">
-    <button>{props.title}</button>
+    <button onClick={loginClicked}>{props.title}</button>
   </div>
 );
+
+/*document.getElementById("btnLogin")
+    .addEventListener("click", loginClicked);*/
 
 const FormInput = props => (
   <div class="row">
@@ -45,19 +63,10 @@ const FormInput = props => (
   </div>
 );
 
-//const OtherMethods = props => (
-//  <div id="alternativeLogin">
-//    <label>Or sign in with:</label>
-//    <div id="iconGroup">
-//      <Facebook />
-//      <Twitter />
-//      <Google />
-//    </div>
-//  </div>
-//);
-
-
-ReactDOM.render(<App />, document.getElementById('container'));
+ReactDOM.render(
+    <App />,
+    document.getElementById('container')
+);
 
 export default App;
 
