@@ -27,9 +27,15 @@ function App() {
     // login the user
     const loginClicked = async e => {
     e.preventDefault();
-        console.log("login button clicked");
-        console.log("username: ", username)
-        setUser(username);
+        if(username && password)
+        {
+            console.log("login button clicked");
+            console.log("username: ", username)
+            setUser(username);
+        }
+        else{
+            alert("Please fill all of the fields");
+        }
         //const user = { username, password };
         // send the username and password to the server
         /*const response = await axios.post(
