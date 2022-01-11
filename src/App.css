@@ -13,6 +13,10 @@ html{
   font-size: 100%;
 }
 
+#logo_img{
+  border-radius: 15px;
+}
+
 #loginform{
   max-width: 500px;
   min-width: 300px;
@@ -38,7 +42,6 @@ html{
   align-items: center;
   padding-top: 2rem;
   max-width: 100%;
-
 }
 
 .row input{
@@ -100,24 +103,26 @@ html{
   padding-bottom: 1.5rem;
 }
 
-#iconGroup{
-  display: flex;
-  justify-content: center;
-  padding: 2rem 0;
-}
-
-#iconGroup a{
-  margin: 0 0.6rem;
-}
-
 #alternativeLogin {
    text-align: center;
    padding-top: 2rem;
    margin-top: 1.5rem;
 }
 
+h1 {
+  color: #FFD700;
+  font-family: 'open sans', sans-serif;
+}
 
+h1 {
+  color: #FFD700;
+  font-family: 'open sans', sans-serif;
+}
 
+p {
+  color: #FFD700;
+  font-family: 'open sans', sans-serif;
+}
 
 .App {
   text-align: center;
