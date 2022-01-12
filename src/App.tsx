@@ -29,12 +29,25 @@ function App() {
     e.preventDefault();
         if(username && password)
         {
+            if(username.length<=4){
+                alert("Username should be at least 5 characters long.");
+               return;
+            }
+            if(! ( (username[0]>='a'&&username[0]<='z') || (username[0]>='A'&&username[0]<='Z') )){
+               alert("Username should start with a letter.");
+               return;
+            }
+            if(password.length<=5){
+                alert("Password should be at least 6 characters long.");
+               return;
+            }
             console.log("login button clicked");
             console.log("username: ", username)
             setUser(username);
         }
         else{
-            alert("Please fill all of the fields");
+            alert("Please fill in all of the fields");
+            return;
         }
         //const user = { username, password };
         // send the username and password to the server
@@ -92,7 +105,7 @@ function App() {
         <h2 id="headerTitle">{props.title}</h2>
     );
 
-    const Form = props => (
+    /*const Form = props => (
         <div>
           <form onSubmit={loginClicked}>
             <div className="row">
@@ -121,7 +134,7 @@ function App() {
             </div>
           </form>
         </div>
-    );
+    );*/
 
     /*const Form = props => (
        <div>
@@ -131,30 +144,31 @@ function App() {
        </div>
     );*/
 
-    const UsernameInput = props => (
+    /*const UsernameInput = props => (
       <div className="row">
         <label>{props.description}</label>
         <input id="Username" key="random1" value={username} onChange={({ target }) => setUsername(target.value)} type={props.type} placeholder={props.placeholder}/>
       </div>
-    );
+    );*/
 
-    const PasswordInput = props => (
+    /*const PasswordInput = props => (
       <div className="row">
         <label>{props.description}</label>
         <input id="Password" key="random2" value={password} onChange={({ target }) => setPassword(target.value)} type={props.type} placeholder={props.placeholder}/>
       </div>
-    );
+    );*/
 
-    const FormButton = props => (
+    /*const FormButton = props => (
       <div id="button" className="row">
         <button key="loginBtn" onClick={loginClicked}>{props.title}</button>
       </div>
-    );
+    );*/
 
     // if there's a user show the message below
     if (user) {
     console.log("username is not null.");
         return (
+    <div>
     <div className="row">
         <img id="logo_img" src={logo} className="App-logo" alt="logo" />
         <p> </p>
@@ -171,8 +185,12 @@ function App() {
                 <Route path='/about' exact element={<About/>}/>
             </Routes>
         </Router>
-        <button onClick={logoutClicked}>logout</button>
 
+
+    </div>
+    <div className="short_row">
+        <button id="logoutBtn" onClick={logoutClicked}>logout</button>
+    </div>
     </div>
         );
     }
