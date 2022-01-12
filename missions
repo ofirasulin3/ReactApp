@@ -1,6 +1,17 @@
 
 
-* implement log out
+* fix logout
+* design Admins page and add a nav bar item
+  AddAdmin an option for admins to register admin page (username+hash password)
+  + CurrentAdminsList page
+
+
+UI Next:
+* design CreateNewPoll page (and move create polls to ui)
+* design showPolls
+* implement login logic (check credentials in db)
+
+* understand how to communicate between UI and backend
 
 done:
 * add state

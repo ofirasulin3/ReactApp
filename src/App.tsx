@@ -18,7 +18,7 @@ function App() {
     // logout the user
     const logoutClicked = () => {
       console.log("logout button clicked");
-      setUser({});
+      setUser("");
       //setUsername("");
       //setPassword("");
       //localStorage.clear();
@@ -57,8 +57,6 @@ function App() {
         );
         // set the state of the user
         setUser(response.data);*/
-        //setUser("David")
-        //setUser(username)
         // store the user in localStorage
         //localStorage.setItem("user", JSON.stringify(response.data));
     };
@@ -105,64 +103,7 @@ function App() {
         <h2 id="headerTitle">{props.title}</h2>
     );
 
-    /*const Form = props => (
-        <div>
-          <form onSubmit={loginClicked}>
-            <div className="row">
-                <label>Username</label>
-                <input id="Username"
-                    key="key1"
-                    value={username}
-                    type="text"
-                    placeholder="Enter your username"
-                    onChange={({ target }) => setUsername(target.value)}
-                />
-            </div>
 
-            <div className="row">
-                <label>Password</label>
-                <input id="Password"
-                    key="key2"
-                    value={password}
-                    type="password"
-                    placeholder="Enter your password"
-                    onChange={({ target }) => setPassword(target.value)}
-                />
-            </div>
-            <div id="button" className="row">
-                <button key="key3" type="submit">Login</button>
-            </div>
-          </form>
-        </div>
-    );*/
-
-    /*const Form = props => (
-       <div>
-         <UsernameInput description="Username" placeholder="Enter your username" type="text" />
-         <PasswordInput description="Password" placeholder="Enter your password" type="password"/>
-         <FormButton title="Log in"/>
-       </div>
-    );*/
-
-    /*const UsernameInput = props => (
-      <div className="row">
-        <label>{props.description}</label>
-        <input id="Username" key="random1" value={username} onChange={({ target }) => setUsername(target.value)} type={props.type} placeholder={props.placeholder}/>
-      </div>
-    );*/
-
-    /*const PasswordInput = props => (
-      <div className="row">
-        <label>{props.description}</label>
-        <input id="Password" key="random2" value={password} onChange={({ target }) => setPassword(target.value)} type={props.type} placeholder={props.placeholder}/>
-      </div>
-    );*/
-
-    /*const FormButton = props => (
-      <div id="button" className="row">
-        <button key="loginBtn" onClick={loginClicked}>{props.title}</button>
-      </div>
-    );*/
 
     // if there's a user show the message below
     if (user) {
