@@ -33,6 +33,13 @@ function App() {
                 alert("Username should be at least 5 characters long.");
                return;
             }
+            for(let i = 0; i < username.length; i++){
+                if( !( (username[i]>='a'&&username[i]<='z') || (username[i]>='A'&&username[i]<='Z') )
+                    && !(username[i]>='0'&&username[i]<='9') ){
+                   alert("Username should contain only english letters or numbers.");
+                   return;
+                }
+            }
             if(! ( (username[0]>='a'&&username[0]<='z') || (username[0]>='A'&&username[0]<='Z') )){
                alert("Username should start with a letter.");
                return;
@@ -41,6 +48,8 @@ function App() {
                 alert("Password should be at least 6 characters long.");
                return;
             }
+
+
             console.log("login button clicked");
             console.log("username: ", username)
             setUser(username);
@@ -65,7 +74,7 @@ function App() {
       render(){
         return(
           <div id="loginform">
-            <FormHeader title="Admin Login" />
+            <FormHeader title="Admin Login"/>
             <div>
           <form onSubmit={loginClicked}>
             <div className="row">

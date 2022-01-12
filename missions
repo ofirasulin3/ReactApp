@@ -1,6 +1,6 @@
 
 
-* fix logout
+
 * design Admins page and add a nav bar item
   AddAdmin an option for admins to register admin page (username+hash password)
   + CurrentAdminsList page
@@ -16,3 +16,4 @@ UI Next:
 done:
 * add state
 * center logo
+* fix logout
