@@ -3,7 +3,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <div class="row">
+    <div class="row2">
       <h1>About</h1>
       <p className="about">A Telegram Polls Manager web application.
       This app includes a Telegram bot interface for user registration and poll answering.

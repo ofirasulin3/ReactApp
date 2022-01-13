@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import About from "./pages/About.tsx";
 import Login from "./pages/Login.tsx";
 import Home from "./pages/Home.tsx";
+import AddAdmin from "./pages/Add_Admin.tsx";
+import AdminsList from "./pages/Admins.tsx";
 
 function App() {
     const [user, setUser] = useState();
@@ -121,25 +123,28 @@ function App() {
     <div>
     <div className="row">
         <img id="logo_img" src={logo} className="App-logo" alt="logo" />
-        <p> </p>
-        <p>Welcome back {user}!</p>
+        <p></p>
 
         <Router>
-            <div>
+            <div className="Links">
                 <Link to="/">Home</Link>
+                <Link to="/add_admin">Add Admin</Link>
+                <Link to="/admins_list">Admins</Link>
                 <Link to="/about">About</Link>
             </div>
 
             <Routes>
                 <Route path='/' exact element={<Home/>} />
+                <Route path='/add_admin' exact element={<AddAdmin/>} />
+                <Route path='/admins_list' exact element={<AdminsList/>} />
                 <Route path='/about' exact element={<About/>}/>
             </Routes>
         </Router>
-
+        <p>Welcome back {user}!</p>
 
     </div>
     <div className="short_row">
-        <button id="logoutBtn" onClick={logoutClicked}>logout</button>
+        <button id="logoutBtn" onClick={logoutClicked}>Logout</button>
     </div>
     </div>
         );
@@ -151,7 +156,7 @@ function App() {
     <img id="logo_img" src={logo} className="App-logo" alt="logo" />
     <p> </p>
     <Router>
-        <div>
+        <div className="Links">
             <Link to="/">Login</Link>
             <Link to="/about">About</Link>
         </div>
