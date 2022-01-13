@@ -1,9 +1,6 @@
 
-
-
-* design Admins page and add a nav bar item
-  AddAdmin an option for admins to register admin page (username+hash password)
-  + CurrentAdminsList page
+* design Admins (CurrentAdminsList page)
+* design AddAdmin (an option for admins to register admin page (username+hash password)
 
 
 UI Next:
@@ -17,3 +14,4 @@ done:
 * add state
 * center logo
 * fix logout
+* add nav bar items

@@ -9,7 +9,7 @@ import About from "./pages/About.tsx";
 import Login from "./pages/Login.tsx";
 import Home from "./pages/Home.tsx";
 import AddAdmin from "./pages/Add_Admin.tsx";
-import AdminsList from "./pages/Admins.tsx";
+import AdminsList, { AdminsList1 } from "./pages/Admins.tsx";
 
 function App() {
     const [user, setUser] = useState();

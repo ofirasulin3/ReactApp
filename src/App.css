@@ -111,6 +111,30 @@ p {
   transition: opacity 0.25s ease-out;
 }
 
+/*li:before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  display: inline-block;
+  height: 100px;
+  width: 30px;
+  background-size: contain;*/
+  /*background-image: url("images/adminicon3.png");*/
+/*}*/
+
+ul {
+   list-style-image: url("images/adminicon.png");
+}
+
+ul li {
+  font-size: 1.2em;
+  font-family: 'open sans', sans-serif;
+  padding-left: 5px;
+  height: 35px;
+  color: black;
+  font-weight: bold;
+}
+
 .short_row{
   display: flex;
   flex-direction: column;
@@ -127,6 +151,8 @@ a:link {
   font-size: 1.2rem;
   font-family: 'open sans', sans-serif;
 }
+
+
 
 #logoutBtn{
   border-radius: 25px;
