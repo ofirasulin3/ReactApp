@@ -40,14 +40,12 @@ render() {
 
 }
 
-const AdminsList1 = () => {
+/*const AdminsList1 = () => {
   return (
     <div>
       <h1>Current Admins List</h1>
-
-
     </div>
   );
-};
+};*/
 
 export default AdminsList;

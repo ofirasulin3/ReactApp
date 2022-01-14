@@ -52,10 +52,9 @@ function App() {
                return;
             }
 
-
+            setUser(username);
             console.log("login button clicked");
             console.log("username: ", username)
-            setUser(username);
         }
         else{
             alert("Please fill in all of the fields");
@@ -137,7 +136,7 @@ function App() {
 
             <Routes>
                 <Route path='/' exact element={<Home user={user}/>} />
-                <Route path='/add_admin' exact element={<AddAdmin/>} />
+                <Route path='/add_admin' exact element={AddAdmin()} />
                 <Route path='/admins_list' exact element={<AdminsList/>} />
                 <Route path='/about' exact element={<About/>}/>
                 <Route path='/contact_us' exact element={<ContactUs/>}/>
