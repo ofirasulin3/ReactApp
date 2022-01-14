@@ -1,14 +1,12 @@
 
 import React from "react";
 
-export const Banner = () => {
-  return <div>Some banner stuff</div>;
-};
 
-const Home = () => {
+const Home = (props) => {
   return (
-    <div>
+    <div className="row2">
       <h1>Home</h1>
+      <p className="about">Welcome back {props.user}!</p>
     </div>
   );
 };

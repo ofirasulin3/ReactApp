@@ -5,9 +5,10 @@ import './App.css';
 //import axios from 'axios';
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import About from "./pages/About.tsx";
-import Login from "./pages/Login.tsx";
 import Home from "./pages/Home.tsx";
+import Login from "./pages/Login.tsx";
+import About from "./pages/About.tsx";
+import ContactUs from "./pages/ContactUs.tsx";
 import AddAdmin from "./pages/Add_Admin.tsx";
 import AdminsList, { AdminsList1 } from "./pages/Admins.tsx";
 
@@ -131,16 +132,18 @@ function App() {
                 <Link to="/add_admin">Add Admin</Link>
                 <Link to="/admins_list">Admins</Link>
                 <Link to="/about">About</Link>
+                <Link to="/contact_us">Contact Us</Link>
             </div>
 
             <Routes>
-                <Route path='/' exact element={<Home/>} />
+                <Route path='/' exact element={<Home user={user}/>} />
                 <Route path='/add_admin' exact element={<AddAdmin/>} />
                 <Route path='/admins_list' exact element={<AdminsList/>} />
                 <Route path='/about' exact element={<About/>}/>
+                <Route path='/contact_us' exact element={<ContactUs/>}/>
             </Routes>
         </Router>
-        <p>Welcome back {user}!</p>
+
 
     </div>
     <div className="short_row">
@@ -159,11 +162,13 @@ function App() {
         <div className="Links">
             <Link to="/">Login</Link>
             <Link to="/about">About</Link>
+            <Link to="/contact_us">Contact Us</Link>
         </div>
 
         <Routes>
             <Route path='/' exact element={<Login/>} />
             <Route path='/about' exact element={<About/>}/>
+            <Route path='/contact_us' exact element={<ContactUs/>}/>
         </Routes>
     </Router>
 

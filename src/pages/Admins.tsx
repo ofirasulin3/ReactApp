@@ -23,7 +23,7 @@ class AdminsList extends React.Component{
 
 render() {
     return (
-    <div>
+    <div className="row2">
         <h1>Current Admins List</h1>
         <ul>
             {
