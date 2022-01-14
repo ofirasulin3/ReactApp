@@ -1,19 +1,21 @@
 
-import React from "react";
+import React, { useState } from "react";
 //import LoginForm from "react";
-//import '../App.css';
+import '../App.css';
+import user2 from '../App.css';
 
 
-function AddAdmin() {
-    /*const [user2, setUser2] = useState();*/
+function AddAdmin(props) {
+    //const [user2, setUser2] = useState();
     //const [username, setUsername] = useState("");
     //const [password, setPassword] = useState("");
     let username2;
     let password2;
 
-    // login the user
+    // sign up the admin
     const signUpClicked = async e => {
-    e.preventDefault();
+        console.log("sign up button clicked");
+        e.preventDefault();
         if(username2 && password2)
         {
             if(username2.length<=4){
@@ -35,10 +37,14 @@ function AddAdmin() {
                 alert("Password should be at least 6 characters long.");
                return;
             }
-
+            console.log("username2:", username2);
+            //props.setNewAdmin(username2);
             //setUser2(username2);
-            console.log("sign up button clicked");
-            console.log("username: ", username2)
+            console.log("props.newAdmin is:", props.newAdmin);
+            alert("Admin "+ username2 + " added successfully!");
+            username2 = "";
+            password2 = "";
+            props.setNewAdmin("");
         }
         else{
             alert("Please fill in all of the fields");
@@ -49,7 +55,7 @@ function AddAdmin() {
         /*const response = await axios.post(
           "http://blogservice.herokuapp.com/api/login",
           user
-        );3
+        );
         // set the state of the user
         setUser(response.data);*/
         // store the user in localStorage
@@ -98,14 +104,32 @@ function AddAdmin() {
       }
     }
 
-    return (
-    <div className="row2">
-      <h1>Add Admin</h1>
+    //if(props.newAdmin){
+    //    console.log("props.newAdmin is not null: ", props.newAdmin);
+    if(username2 && username2!=""){
+    console.log("username2 is not null: ", username2);
+        return (
+        <div className="row2">
+          <h1>Add Admin</h1>
 
-      <SignUpForm />
+      <p className="about">Admin {username2} added successfully!</p>
 
-    </div>
-  );
+      {/*<p className="about">Admin {props.newAdmin} added successfully!</p>*/}
+
+        </div>
+        );
+    }
+    else{
+        //console.log("props.newAdmin is null");
+        return (
+        <div className="row2">
+          <h1>Add Admin</h1>
+
+          <SignUpForm />
+
+        </div>
+        );
+    }
 }
 
 const AddAdmin2 = () => {

@@ -14,6 +14,7 @@ import AdminsList, { AdminsList1 } from "./pages/Admins.tsx";
 
 function App() {
     const [user, setUser] = useState();
+    const [user2, setUser2] = useState();
     //const [username, setUsername] = useState("");
     //const [password, setPassword] = useState("");
     let username;
@@ -22,6 +23,7 @@ function App() {
     const logoutClicked = () => {
       console.log("logout button clicked");
       setUser("");
+      setUser2("");
       //setUsername("");
       //setPassword("");
       //localStorage.clear();
@@ -136,7 +138,7 @@ function App() {
 
             <Routes>
                 <Route path='/' exact element={<Home user={user}/>} />
-                <Route path='/add_admin' exact element={AddAdmin()} />
+                <Route path='/add_admin' exact element={<AddAdmin newAdmin={user2} setNewAdmin={setUser2} />} />
                 <Route path='/admins_list' exact element={<AdminsList/>} />
                 <Route path='/about' exact element={<About/>}/>
                 <Route path='/contact_us' exact element={<ContactUs/>}/>

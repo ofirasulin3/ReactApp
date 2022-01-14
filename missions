@@ -1,12 +1,11 @@
 
-* design AddAdmin (an option for admins to register admin page (username+hash password)
 
 UI Next:
 * design CreateNewPoll page (and move create polls to ui)
 * design showPolls
-* implement login logic (check credentials in db)
 
 * understand how to communicate between UI and backend
+* implement login logic (check credentials in db)
 
 if there is time:
 
@@ -18,3 +17,4 @@ done:
 * design Admins (CurrentAdminsList page)
 * add "contact us" page
 * fixed bug of h1 not in the middle
+* design AddAdmin (an option for admins to register admin page (username+hash password)
