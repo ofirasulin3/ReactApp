@@ -4,12 +4,13 @@ import React from "react";
 
 class AdminsList extends React.Component{
     state = {
-        admins: [{name:"Vitaly" , password:"123456"},
+        /*admins: [{name:"Vitaly" , password:"123456"},
         {name:"Ofir" , password:"123123"},
-        {name:"Tamar" , password:"654321"}]
+        {name:"Tamar" , password:"654321"}]*/
+        admins: []
     };
 
-    /*componentDidMount() {
+    componentDidMount() {
         fetch('https://swapi.dev/api/people/').then(data => data.json()).then(res => {
             this.setState(() => {
                 const ar = res.results;
@@ -18,7 +19,7 @@ class AdminsList extends React.Component{
                 }
             })
         })
-    }*/
+    }
 
 
 render() {

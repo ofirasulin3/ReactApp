@@ -1,4 +1,4 @@
-
+* fix bug of form not empty
 
 UI Next:
 * design CreateNewPoll page (and move create polls to ui)

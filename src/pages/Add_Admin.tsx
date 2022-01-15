@@ -7,8 +7,7 @@ import user2 from '../App.css';
 
 function AddAdmin(props) {
     //const [user2, setUser2] = useState();
-    //const [username, setUsername] = useState("");
-    //const [password, setPassword] = useState("");
+    const [filled, setFilled] = useState();
     let username2;
     let password2;
 
@@ -41,10 +40,12 @@ function AddAdmin(props) {
             //props.setNewAdmin(username2);
             //setUser2(username2);
             console.log("props.newAdmin is:", props.newAdmin);
+            //inserting to db
             alert("Admin "+ username2 + " added successfully!");
             username2 = "";
             password2 = "";
-            props.setNewAdmin("");
+            setFilled("");
+            //props.setNewAdmin("");
         }
         else{
             alert("Please fill in all of the fields");
