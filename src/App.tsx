@@ -34,10 +34,9 @@ function App() {
 
     // login the user
     const loginClicked = async e => {
-    console.log("login button clicked");
-    e.preventDefault();
-        if(username && password)
-        {
+        console.log("login button clicked");
+        e.preventDefault();
+        if(username && password){
             if(username.length<=4){
                 alert("Username should be at least 5 characters long.");
                return;
@@ -57,50 +56,44 @@ function App() {
                 alert("Password should be at least 6 characters long.");
                return;
             }
-
             console.log("username: ", username);
-            //fetch('http://localhost:5000/login_auth',{
-            /*fetch('http://127.0.0.1:5000/login_auth',
+            fetch('http://127.0.0.1:5000/login_auth',
                 {
                   'methods':'GET',
-                   headers : {
+                   'headers' : {
                     'username':username,
                     'password':password,
                     'Content-Type':'application/json'
                    }
                 }
-            ).then(response => response.json())
-              .then((response) => {
-                console.log("response from flask for login_auth is: ", response);
-                if(response.status="200"){
-                    console.log("username and password are valid");
+            ).then((response) => {
+                console.log("response from flask for login_auth is:", response);
+                console.log("response.status is:", response.status);
+                if(response.status=="200"){
+                    console.log("Username", username, "logged in successfully");
+                    console.log("his password is", password);
                     setUser(username);
+                    username = "";
+                    password = "";
                 }
-                else{
+                else if(response.status=="409"){
                     console.log("username and password are not valid");
+                    alert("The password and username credentials are not correct.\nPlease try again.");
+                } else if(response.status=="401"){
+                    alert("This admin doesn't exists.");
+                } else{
+                    alert("500 Internal Server Error.\nPlease try again.");
                 }
-                //add check for 401 - This Admin name doesn\'t exist
-                //403- wrong password
-                setAuthenticated(response);
-               })
-               .catch(error => console.log(error))*/
-                                    setUser(username);
+           })
+           .catch(error => console.log(error))
 
         }
         else{
             alert("Please fill in all of the fields");
             return;
         }
-        //const user = { username, password };
-        // send the username and password to the server
-        /*const response = await axios.post(
-          "http://blogservice.herokuapp.com/api/login",
-          user
-        );
-        // set the state of the user
-        setUser(response.data);*/
-        // store the user in localStorage
-        //localStorage.setItem("user", JSON.stringify(response.data));
+        //TODO: setUser(username);
+
     };
 
     class LoginForm extends React.Component{

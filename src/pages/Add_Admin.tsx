@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import '../App.css';
 import user2 from '../App.css';
 
-
 function AddAdmin(props) {
     //const [user2, setUser2] = useState();
     //const [filled, setFilled] = useState();
@@ -15,8 +14,7 @@ function AddAdmin(props) {
     const signUpClicked = async e => {
         console.log("sign up button clicked");
         e.preventDefault();
-        if(username2 && password2)
-        {
+        if(username2 && password2){
             if(username2.length<=4){
                 alert("Username should be at least 5 characters long.");
                return;
@@ -53,43 +51,29 @@ function AddAdmin(props) {
                     'Content-Type':'application/json'
                    }
                 }
-           // ).then(response => response.json())
+           //).then(response => response.json())
            //.then(response => JSON.parse(JSON.stringify(response)))
             ).then((response) => {
-                console.log("response from flask for login_auth is: ", response);
-                console.log("response.status is: ", response.status);
-                if(response.status==="200"){
+                console.log("response from flask for add_admin is:", response);
+                console.log("response.status is:", response.status);
+                if(response.status=="200"){
                     console.log("username and password are valid");
                     //setUser(username);
                     alert("Admin " + username2 + " added successfully!");
                     username2 = "";
                     password2 = "";
-                } else if(response.status==="409"){
-
-
+                } else if(response.status=="409"){
+                    alert("Admin username already exists.");
                 } else{
-                    console.log("username and password are not valid");
+                    alert("500 Internal Server Error. Please try again.");
                 }
-                //add check for 401 - This Admin name doesn\'t exist
-                //403- wrong password
                 //setAuthenticated(response);
                }).catch(error => console.log(error, error));
-
         }
         else{
             alert("Please fill in all of the fields");
             return;
         }
-        //const user = { username, password };
-        // send the username and password to the server
-        /*const response = await axios.post(
-          "http://blogservice.herokuapp.com/api/login",
-          user
-        );
-        // set the state of the user
-        setUser(response.data);*/
-        // store the user in localStorage
-        //localStorage.setItem("user", JSON.stringify(response.data));
     };
 
     const FormHeader = props => (
