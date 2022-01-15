@@ -47,30 +47,33 @@ function AddAdmin(props) {
             fetch('http://127.0.0.1:5000/add_admin',
                 {
                   'methods':'GET',
-                   headers : {
+                   'headers' : {
                     'username':username2,
                     'password':password2,
                     'Content-Type':'application/json'
                    }
                 }
-            ).then(response => response.json())
-              .then((response) => {
+           // ).then(response => response.json())
+           //.then(response => JSON.parse(JSON.stringify(response)))
+            ).then((response) => {
                 console.log("response from flask for login_auth is: ", response);
-                if(response.status="200"){
+                console.log("response.status is: ", response.status);
+                if(response.status==="200"){
                     console.log("username and password are valid");
                     //setUser(username);
-                    alert("Admin "+ username2 + " added successfully!");
+                    alert("Admin " + username2 + " added successfully!");
                     username2 = "";
                     password2 = "";
-                }
-                else{
+                } else if(response.status==="409"){
+
+
+                } else{
                     console.log("username and password are not valid");
                 }
                 //add check for 401 - This Admin name doesn\'t exist
                 //403- wrong password
-                setAuthenticated(response);
-               })
-               .catch(error => console.log(error, error))
+                //setAuthenticated(response);
+               }).catch(error => console.log(error, error));
 
         }
         else{

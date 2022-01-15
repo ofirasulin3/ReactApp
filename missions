@@ -1,8 +1,9 @@
 
-UI Next:
-* design CreateNewPoll page (and move create polls to ui)
-* design showPolls
+Ofir:
 * implement login logic (check credentials in db)
+  and add_admin logic
+* design CreateNewPoll page (and move create polls to ui)
+* fix bug of form not empty
 
 if there is time:
 
