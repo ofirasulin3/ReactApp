@@ -7,7 +7,7 @@ import user2 from '../App.css';
 
 function AddAdmin(props) {
     //const [user2, setUser2] = useState();
-    const [filled, setFilled] = useState();
+    //const [filled, setFilled] = useState();
     let username2;
     let password2;
 
@@ -39,13 +39,39 @@ function AddAdmin(props) {
             console.log("username2:", username2);
             //props.setNewAdmin(username2);
             //setUser2(username2);
-            console.log("props.newAdmin is:", props.newAdmin);
+            //console.log("props.newAdmin is:", props.newAdmin);
             //inserting to db
-            alert("Admin "+ username2 + " added successfully!");
-            username2 = "";
-            password2 = "";
-            setFilled("");
+
+            //setFilled("");
             //props.setNewAdmin("");
+            fetch('http://127.0.0.1:5000/add_admin',
+                {
+                  'methods':'GET',
+                   headers : {
+                    'username':username2,
+                    'password':password2,
+                    'Content-Type':'application/json'
+                   }
+                }
+            ).then(response => response.json())
+              .then((response) => {
+                console.log("response from flask for login_auth is: ", response);
+                if(response.status="200"){
+                    console.log("username and password are valid");
+                    //setUser(username);
+                    alert("Admin "+ username2 + " added successfully!");
+                    username2 = "";
+                    password2 = "";
+                }
+                else{
+                    console.log("username and password are not valid");
+                }
+                //add check for 401 - This Admin name doesn\'t exist
+                //403- wrong password
+                setAuthenticated(response);
+               })
+               .catch(error => console.log(error, error))
+
         }
         else{
             alert("Please fill in all of the fields");
@@ -107,7 +133,7 @@ function AddAdmin(props) {
 
     //if(props.newAdmin){
     //    console.log("props.newAdmin is not null: ", props.newAdmin);
-    if(username2 && username2!=""){
+    if(username2 && username2!==""){
     console.log("username2 is not null: ", username2);
         return (
         <div className="row2">
@@ -133,7 +159,7 @@ function AddAdmin(props) {
     }
 }
 
-const AddAdmin2 = () => {
+/*const AddAdmin2 = () => {
   return (
     <div className="row2">
       <h1>Add Admin</h1>
@@ -142,6 +168,6 @@ const AddAdmin2 = () => {
 
     </div>
   );
-};
+};*/
 
 export default AddAdmin;

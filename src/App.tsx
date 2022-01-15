@@ -15,6 +15,9 @@ import AdminsList, { AdminsList1 } from "./pages/Admins.tsx";
 function App() {
     const [user, setUser] = useState();
     const [user2, setUser2] = useState();
+
+    const [authenticated, setAuthenticated] = useState(false);
+
     //const [username, setUsername] = useState("");
     //const [password, setPassword] = useState("");
     let username;
@@ -31,6 +34,7 @@ function App() {
 
     // login the user
     const loginClicked = async e => {
+    console.log("login button clicked");
     e.preventDefault();
         if(username && password)
         {
@@ -54,9 +58,34 @@ function App() {
                return;
             }
 
-            setUser(username);
-            console.log("login button clicked");
-            console.log("username: ", username)
+            console.log("username: ", username);
+            //fetch('http://localhost:5000/login_auth',{
+            /*fetch('http://127.0.0.1:5000/login_auth',
+                {
+                  'methods':'GET',
+                   headers : {
+                    'username':username,
+                    'password':password,
+                    'Content-Type':'application/json'
+                   }
+                }
+            ).then(response => response.json())
+              .then((response) => {
+                console.log("response from flask for login_auth is: ", response);
+                if(response.status="200"){
+                    console.log("username and password are valid");
+                    setUser(username);
+                }
+                else{
+                    console.log("username and password are not valid");
+                }
+                //add check for 401 - This Admin name doesn\'t exist
+                //403- wrong password
+                setAuthenticated(response);
+               })
+               .catch(error => console.log(error))*/
+                                    setUser(username);
+
         }
         else{
             alert("Please fill in all of the fields");
