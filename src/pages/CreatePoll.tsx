@@ -1,13 +1,13 @@
 
 import React, { useState } from "react";
 //import '../App.css';
-import Dropdown from 'react-dropdown'
+//import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import Select from 'react-select';
 
 function CreatePoll() {
     //const [user2, setUser2] = useState();
-    //const [filled, setFilled] = useState();
+    const [filled, setFilled] = useState(0);
     //const [expectedAnswer, setExpectedAnswer] = useState('1');
     let question;
     let answer1;
@@ -15,6 +15,7 @@ function CreatePoll() {
     let answer3;
     let answer4;
     let filter_answer = '1';
+    let questions = [];
 
     //const options = ['1', '2', '3', '4']
     const options = [
@@ -27,18 +28,19 @@ function CreatePoll() {
 
     const handleChange = selectedOption => {
        filter_answer = selectedOption.value;
-       console.log('filter_answer changed:', filter_answer);
+       //console.log('filter_answer changed:', filter_answer);
        /*setExpectedAnswer(selectedOption.value);*/
     };
 
     // submiting the poll
+    //concating the last question to the questions list
+    //and sending all questions list to the db
     const submitPollClicked = async e => {
         console.log("submit poll button clicked");
         e.preventDefault();
-
     }
 
-    //adding a question to the questions list
+    //concating a question to the questions list
     const nextQuestionClicked = async e => {
         console.log("next question button clicked");
         e.preventDefault();
@@ -52,9 +54,41 @@ function CreatePoll() {
                alert("You have to fill in answer 3 before answer 4");
                return;
             }
-            console.log("final filter_answer is: ", filter_answer)
-            //setFilled("");
-            fetch('http://127.0.0.1:5000/add_admin',
+
+            console.log("current question is: ", question)
+
+            let q_singleton =
+            [{'question':question,
+             'answer1':answer1,
+             'answer2':answer2,
+             'answer3':answer3,
+             'answer4':answer4,
+             'filter_answer':filter_answer}];
+
+            questions = questions.concat(q_singleton);
+            console.log("current questions list is: ", questions)
+
+            /*{'question2': question2,
+              'answer1':answer1, 'answer2':answer2,
+              'answer3':answer3, 'answer4':answer4,
+              'filter_answer':filter_answer}];*/
+
+            console.log("Question: ", question, "added successfully!\n"
+                           + " answer1: ", answer1, "\n"
+                           + " answer2: ", answer2, "\n"
+                           + " answer3: ", answer3, "\n"
+                           + " answer4: ", answer4, "\n"
+                           + " filter_answer: ", filter_answer, "\n");
+
+                    //reset all variables.
+                    question = "";
+                    answer1 = "";
+                    answer2 = "";
+                    answer3 = "";
+                    answer4 = "";
+                    filter_answer = '1';
+                    setFilled(1-filled);
+            /*fetch('http://127.0.0.1:5000/add_admin',
                 {
                   'methods':'GET',
                    'headers' : {
@@ -63,22 +97,32 @@ function CreatePoll() {
                     'Content-Type':'application/json'
                    }
                 }
-           //).then(response => response.json())
-           //.then(response => JSON.parse(JSON.stringify(response)))
             ).then((response) => {
                 console.log("response from flask for add_admin is:", response);
                 console.log("response.status is:", response.status);
                 if(response.status==="200"){
                     console.log("username and password are valid");
-                    alert("Admin " + username2 + " added successfully!");
-                    username2 = "";
-                    password2 = "";
+                    alert("Question: ", question, "added successfully!\n"
+                           + " answer1: ", answer1, "\n"
+                           + " answer2: ", answer2, "\n"
+                           + " answer3: ", answer3, "\n"
+                           + " answer4: ", answer4, "\n"
+                           + " filter_answer: ", filter_answer, "\n");
+
+                    //reset all variables.
+                    question = "";
+                    answer1 = "";
+                    answer2 = "";
+                    answer3 = "";
+                    answer4 = "";
+                    filter_answer = '1';
+
                 } else if(response.status==="409"){
                     alert("Admin username already exists.");
                 } else{
                     alert("500 Internal Server Error. Please try again.");
                 }
-               }).catch(error => console.log(error, error));
+               }).catch(error => console.log(error, error));*/
         }
         else{
             alert("Please fill in all mandatory fields");
@@ -98,7 +142,7 @@ function CreatePoll() {
           <div id="loginform">
           {/*<FormHeader title="Create New Poll"/>*/}
           <div>
-          <form onSubmit={submitPollClicked}>
+          <form onSubmit={nextQuestionClicked}>
             <div className="row">
                 <label htmlFor="Question">Question</label>
                 <input id="Question"
@@ -153,10 +197,10 @@ function CreatePoll() {
                     onChange={({ target }) => {answer4 = target.value}}
                 />
                 <div id="line"></div>
-                <div id="line2">Number of filtering answer:</div>
-                <div id="line"></div>
 
-                <Select
+                <div id="line2">Number of filtering answer:</div>
+
+                <Select id="selectt"
                     value={selectedOption}
                     defaultValue={{value: '1', label: '1'}}
                     onChange={handleChange}

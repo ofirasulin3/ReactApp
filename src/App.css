@@ -202,8 +202,12 @@ a:visited {
 }
 
 #line2{
-  height: 30px;
+  height: 25px;
   color: DimGrey;
+}
+
+#selectt {
+  height: 10px;
 }
 
 #alternativeLogin {
