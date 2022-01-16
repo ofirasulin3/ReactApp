@@ -11,6 +11,7 @@ import About from "./pages/About.tsx";
 import ContactUs from "./pages/ContactUs.tsx";
 import AddAdmin from "./pages/Add_Admin.tsx";
 import AdminsList, { AdminsList1 } from "./pages/Admins.tsx";
+import Charts from "./pages/Charts.tsx";
 
 function App() {
     const [user, setUser] = useState();
@@ -156,6 +157,7 @@ function App() {
                 <Link to="/admins_list">Admins</Link>
                 <Link to="/about">About</Link>
                 <Link to="/contact_us">Contact Us</Link>
+                <Link to="/charts">Charts</Link>
             </div>
 
             <Routes>
@@ -164,6 +166,7 @@ function App() {
                 <Route path='/admins_list' exact element={<AdminsList/>} />
                 <Route path='/about' exact element={<About/>}/>
                 <Route path='/contact_us' exact element={<ContactUs/>}/>
+                <Route path='/charts' exact element={<Charts/>}/>
             </Routes>
         </Router>
 
@@ -186,12 +189,15 @@ function App() {
             <Link to="/">Login</Link>
             <Link to="/about">About</Link>
             <Link to="/contact_us">Contact Us</Link>
+             <Link to="/charts">Charts</Link>
+
         </div>
 
         <Routes>
             <Route path='/' exact element={<Login/>} />
             <Route path='/about' exact element={<About/>}/>
             <Route path='/contact_us' exact element={<ContactUs/>}/>
+            <Route path='/charts' exact element={<Charts/>} />
         </Routes>
     </Router>
 
