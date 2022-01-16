@@ -197,6 +197,15 @@ a:visited {
   padding-bottom: 1.5rem;
 }
 
+#line{
+  height: 5px;
+}
+
+#line2{
+  height: 30px;
+  color: DimGrey;
+}
+
 #alternativeLogin {
    text-align: center;
    padding-top: 2rem;

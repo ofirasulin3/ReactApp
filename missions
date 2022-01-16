@@ -1,10 +1,7 @@
 
 Ofir:
-* implement login logic (salt bug)
 * design CreateNewPoll page (and move create polls to ui)
 * fix bug of form not empty
-
-if there is time:
 
 done:
 * add state
@@ -17,3 +14,4 @@ done:
 * design AddAdmin (an option for admins to register admin page (username+hash password)
 * understand how to communicate between UI and backend
 * add_admin logic
+* implement login logic (salt bug)

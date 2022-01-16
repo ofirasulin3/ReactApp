@@ -9,14 +9,15 @@ import Home from "./pages/Home.tsx";
 import Login from "./pages/Login.tsx";
 import About from "./pages/About.tsx";
 import ContactUs from "./pages/ContactUs.tsx";
-import AddAdmin from "./pages/Add_Admin.tsx";
-import AdminsList, { AdminsList1 } from "./pages/Admins.tsx";
+import CreatePoll from "./pages/CreatePoll.tsx";
+import AddAdmin from "./pages/AddAdmin.tsx";
+import AdminsList from "./pages/Admins.tsx";
 
 function App() {
     const [user, setUser] = useState();
     const [user2, setUser2] = useState();
 
-    const [authenticated, setAuthenticated] = useState(false);
+    //const [authenticated, setAuthenticated] = useState(false);
 
     //const [username, setUsername] = useState("");
     //const [password, setPassword] = useState("");
@@ -69,17 +70,18 @@ function App() {
             ).then((response) => {
                 console.log("response from flask for login_auth is:", response);
                 console.log("response.status is:", response.status);
-                if(response.status=="200"){
+                //console.log("response.BaseResponse is:", response.BaseResponse);
+                if(response.status==="200"){
                     console.log("Username", username, "logged in successfully");
                     console.log("his password is", password);
                     setUser(username);
                     username = "";
                     password = "";
                 }
-                else if(response.status=="409"){
+                else if(response.status==="409"){
                     console.log("username and password are not valid");
                     alert("The password and username credentials are not correct.\nPlease try again.");
-                } else if(response.status=="401"){
+                } else if(response.status==="401"){
                     alert("This admin doesn't exists.");
                 } else{
                     alert("500 Internal Server Error.\nPlease try again.");
@@ -100,7 +102,7 @@ function App() {
       render(){
         return(
           <div id="loginform">
-            <FormHeader title="Admin Login"/>
+            {/*<FormHeader title="Admin Login"/>*/}
             <div>
           <form onSubmit={loginClicked}>
             <div className="row">
@@ -125,7 +127,7 @@ function App() {
                 />
             </div>
             <div id="button" className="row">
-                <button key="key3" type="submit">Login</button>
+                <button key="key3" type="submit">Login 📩</button>
             </div>
           </form>
         </div>
@@ -134,9 +136,9 @@ function App() {
       }
     }
 
-    const FormHeader = props => (
+    /*const FormHeader = props => (
         <h2 id="headerTitle">{props.title}</h2>
-    );
+    );*/
 
 
 
@@ -186,12 +188,14 @@ function App() {
             <Link to="/">Login</Link>
             <Link to="/about">About</Link>
             <Link to="/contact_us">Contact Us</Link>
+            <Link to="/create_new_poll">Create Poll</Link>
         </div>
 
         <Routes>
             <Route path='/' exact element={<Login/>} />
             <Route path='/about' exact element={<About/>}/>
             <Route path='/contact_us' exact element={<ContactUs/>}/>
+            <Route path='/create_new_poll' exact element={<CreatePoll/>}/>
         </Routes>
     </Router>
 
