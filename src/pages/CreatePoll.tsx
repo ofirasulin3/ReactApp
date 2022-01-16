@@ -27,14 +27,8 @@ function CreatePoll() {
 
     const handleChange = selectedOption => {
        filter_answer = selectedOption.value;
-       //console.log('Option selected:', selectedOption);
-       //console.log('value selected:', selectedOption.value);
-       //console.log('label selected:', selectedOption.label);
-       console.log('filter_answer:', filter_answer);
-
-       /*setExpectedAnswer(selectedOption.value);
-       console.log('expectedAnswer selected:', expectedAnswer);
-        */
+       console.log('filter_answer changed:', filter_answer);
+       /*setExpectedAnswer(selectedOption.value);*/
     };
 
     // submiting the poll
@@ -58,7 +52,7 @@ function CreatePoll() {
                alert("You have to fill in answer 3 before answer 4");
                return;
             }
-            console.log("filter_answer is: ", filter_answer)
+            console.log("final filter_answer is: ", filter_answer)
             //setFilled("");
             fetch('http://127.0.0.1:5000/add_admin',
                 {
