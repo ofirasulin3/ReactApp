@@ -52,11 +52,47 @@ function CreatePoll() {
         console.log("submit poll button clicked");
         e.preventDefault();
 
+        if(question && answer1 && answer2){
+            alert("Please Submit the question before submitting poll.");
+            return;
+        }
         //check if questions is empty.
-        body: JSON.stringify(your_array)
+        if(q_list.length===0){
+            alert("Please Submit at least 1 question before submitting a poll.");
+            return;
+        }
 
+        fetch('http://127.0.0.1:5000/new_poll_submitted',
+                {
+                  'methods':'GET',
+                   'headers' : {
+                    'Content-Type':'application/json'
+                   },
+                   body: JSON.stringify(q_list)
+                }
+            ).then((response) => {
+                console.log("response from flask for add_admin is:", response);
+                console.log("response.status is:", response.status);
+                if(response.status==="200"){
+                    alert("Poll was added successfully");
+                    console.log("Poll Questions are:\n", questions);
 
-        //at the end:
+                    //reset all variables.
+                    question = "";
+                    answer1 = "";
+                    answer2 = "";
+                    answer3 = "";
+                    answer4 = "";
+                    filter_answer = '1';
+
+                } else if(response.status==="409"){
+                    alert("Invalid poll arguments.");
+                } else{
+                    alert("500 Internal Server Error. Please try again.");
+                }
+               }).catch(error => console.log(error, error));
+
+        //Reset questions list at the end:
         setQ_list([]);
     }
 
@@ -85,11 +121,6 @@ function CreatePoll() {
              'answer4':answer4,
              'filter_answer':filter_answer}];
 
-            /*{'question2': question2,
-              'answer1':answer1, 'answer2':answer2,
-              'answer3':answer3, 'answer4':answer4,
-              'filter_answer':filter_answer}];*/
-
             console.log("Question: ", question, "added successfully!\n"
                            + " answer1: ", answer1, "\n"
                            + " answer2: ", answer2, "\n"
@@ -112,42 +143,9 @@ function CreatePoll() {
             //setQ_list([...q_list, ...q_singleton]);
             //questions = [...questions, ...q_singleton]
             console.log("Questions after concat:", q_list)
+            console.log("Questions size after concat:", q_list.length)
             setFilled(1-filled);
-            /*fetch('http://127.0.0.1:5000/add_admin',
-                {
-                  'methods':'GET',
-                   'headers' : {
-                    'username':username2,
-                    'password':password2,
-                    'Content-Type':'application/json'
-                   }
-                }
-            ).then((response) => {
-                console.log("response from flask for add_admin is:", response);
-                console.log("response.status is:", response.status);
-                if(response.status==="200"){
-                    console.log("username and password are valid");
-                    alert("Question: ", question, "added successfully!\n"
-                           + " answer1: ", answer1, "\n"
-                           + " answer2: ", answer2, "\n"
-                           + " answer3: ", answer3, "\n"
-                           + " answer4: ", answer4, "\n"
-                           + " filter_answer: ", filter_answer, "\n");
 
-                    //reset all variables.
-                    question = "";
-                    answer1 = "";
-                    answer2 = "";
-                    answer3 = "";
-                    answer4 = "";
-                    filter_answer = '1';
-
-                } else if(response.status==="409"){
-                    alert("Admin username already exists.");
-                } else{
-                    alert("500 Internal Server Error. Please try again.");
-                }
-               }).catch(error => console.log(error, error));*/
         }
         else{
             alert("Please fill in all mandatory fields");
@@ -231,13 +229,14 @@ function CreatePoll() {
                     onChange={handleChange}
                     options={options}
                 />
+
             </div>
 
             <div id="button" className="row">
                 <div id="line"></div>
                 <div id="line"></div>
 
-                <button key="key-5" onClick={nextQuestionClicked}>Next Question ⏭️</button>
+                <button key="key-5" onClick={nextQuestionClicked}>Submit Question ⏭️</button>
                 <div id="line"></div>
                 <button key="key-6" type="submit" >Submit Poll 📊</button>
             </div>
