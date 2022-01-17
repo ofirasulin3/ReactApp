@@ -1,7 +1,7 @@
 
 Ofir:
 * design CreateNewPoll page (and move create polls to ui)
-* fix bug of form not empty
+* fixed bug of form not empty, need to fix bug of questions_list concat
 
 done:
 * add state
@@ -15,3 +15,4 @@ done:
 * understand how to communicate between UI and backend
 * add_admin logic
 * implement login logic (salt bug)
+* fix bug of form not empty

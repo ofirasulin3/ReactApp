@@ -8,6 +8,7 @@ import Select from 'react-select';
 function CreatePoll() {
     //const [user2, setUser2] = useState();
     const [filled, setFilled] = useState(0);
+    const [q_list, setQ_list] = useState([]);
     //const [expectedAnswer, setExpectedAnswer] = useState('1');
     let question;
     let answer1;
@@ -15,7 +16,19 @@ function CreatePoll() {
     let answer3;
     let answer4;
     let filter_answer = '1';
-    let questions = [];
+    //let questions = [];
+
+    const addQuestionToQuestions = async(q_to_add) =>{
+      var currentQuestions = q_list;
+      currentQuestions.push(q_to_add);
+      setQ_list(currentQuestions);
+    }
+
+    /*const addQuestionToQuestions = async (q_to_add) => {
+        var currentQuestions = q_list.slice();
+        currentQuestions.push(q_to_add);
+        setQ_list(currentQuestions);
+    }*/
 
     //const options = ['1', '2', '3', '4']
     const options = [
@@ -38,6 +51,13 @@ function CreatePoll() {
     const submitPollClicked = async e => {
         console.log("submit poll button clicked");
         e.preventDefault();
+
+        //check if questions is empty.
+        body: JSON.stringify(your_array)
+
+
+        //at the end:
+        setQ_list([]);
     }
 
     //concating a question to the questions list
@@ -65,9 +85,6 @@ function CreatePoll() {
              'answer4':answer4,
              'filter_answer':filter_answer}];
 
-            questions = questions.concat(q_singleton);
-            console.log("current questions list is: ", questions)
-
             /*{'question2': question2,
               'answer1':answer1, 'answer2':answer2,
               'answer3':answer3, 'answer4':answer4,
@@ -80,14 +97,22 @@ function CreatePoll() {
                            + " answer4: ", answer4, "\n"
                            + " filter_answer: ", filter_answer, "\n");
 
-                    //reset all variables.
-                    question = "";
-                    answer1 = "";
-                    answer2 = "";
-                    answer3 = "";
-                    answer4 = "";
-                    filter_answer = '1';
-                    setFilled(1-filled);
+            //reset all variables.
+            question = "";
+            answer1 = "";
+            answer2 = "";
+            answer3 = "";
+            answer4 = "";
+            filter_answer = '1';
+            console.log("q_singleton:", q_singleton)
+            console.log("Questions before concat:", q_list)
+            //questions = questions.concat(q_singleton);
+            //setQ_list(q_list.concat(q_singleton));
+            addQuestionToQuestions(q_singleton)
+            //setQ_list([...q_list, ...q_singleton]);
+            //questions = [...questions, ...q_singleton]
+            console.log("Questions after concat:", q_list)
+            setFilled(1-filled);
             /*fetch('http://127.0.0.1:5000/add_admin',
                 {
                   'methods':'GET',
@@ -142,7 +167,7 @@ function CreatePoll() {
           <div id="loginform">
           {/*<FormHeader title="Create New Poll"/>*/}
           <div>
-          <form onSubmit={nextQuestionClicked}>
+          <form onSubmit={submitPollClicked}>
             <div className="row">
                 <label htmlFor="Question">Question</label>
                 <input id="Question"
@@ -206,23 +231,15 @@ function CreatePoll() {
                     onChange={handleChange}
                     options={options}
                 />
-               {/*<div><select id = "dropdown" ref = {(input)=> this.menu = input}>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-               </select></div>*/}
-               {/*<Dropdown options={options} onChange={this._onSelect; console.log("this._onSelect is:", this._onSelect)} value={defaultOption} placeholder="Select answer number filter:" />*/}
-               {/*<Dropdown options={options} onChange={({ target }) => {filter_answer = target.value; console.log("filter_answer is:", filter_answer)}} value={defaultOption} placeholder="Select answer number filter:" />*/}
             </div>
 
             <div id="button" className="row">
                 <div id="line"></div>
                 <div id="line"></div>
 
-                <button key="key-5" type="submit">Next Question ⏭️</button>
+                <button key="key-5" onClick={nextQuestionClicked}>Next Question ⏭️</button>
                 <div id="line"></div>
-                <button key="key-6">Submit Poll 📊</button>
+                <button key="key-6" type="submit" >Submit Poll 📊</button>
             </div>
 
           </form>
