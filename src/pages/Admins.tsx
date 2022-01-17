@@ -27,8 +27,6 @@ class AdminsList extends React.Component{
                 }
             }).then((response) => response.json()).then((data) =>
           {
-
-
               let mydata = [];
               data.map(row=>{
                 Object.keys(row).map(key=>{

@@ -74,17 +74,17 @@ function App() {
                 console.log("response from flask for login_auth is:", response);
                 console.log("response.status is:", response.status);
                 //console.log("response.BaseResponse is:", response.BaseResponse);
-                if(response.status==="200"){
+                if(response.status===200){
                     console.log("Username", username, "logged in successfully");
                     console.log("his password is", password);
                     setUser(username);
                     username = "";
                     password = "";
                 }
-                else if(response.status==="409"){
+                else if(response.status===409){
                     console.log("username and password are not valid");
                     alert("The password and username credentials are not correct.\nPlease try again.");
-                } else if(response.status==="401"){
+                } else if(response.status===401){
                     alert("This admin doesn't exists.");
                 } else{
                     alert("500 Internal Server Error.\nPlease try again.");

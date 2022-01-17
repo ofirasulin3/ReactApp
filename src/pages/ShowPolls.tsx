@@ -5,6 +5,7 @@ import Select from 'react-select';
 function ShowPolls() {
     const [pollWasChosen, setPollWasChosen] = useState(0);
     const [questionWasChosen, setQuestionWasChosen] = useState(0);
+    const [questions_options, set_questions_options] = useState([]);
 
     //const [poll_name, setPoll_name] = useState();
     let filter_poll = '1';
@@ -37,6 +38,43 @@ function ShowPolls() {
         } else{
             setPollWasChosen(1);
             console.log("chosen poll_name is:", filter_poll);
+
+            fetch('http://127.0.0.1:5000/poll_questions',
+                {
+                    method: 'GET',
+                    headers:
+                    {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'poll_name': filter_poll,
+                    }
+                }
+            )
+            .then((response) => {
+                console.log("response from flask is:", response);
+                response.json();
+                console.log("json response is:", response);
+            })
+             .then((data) => {
+              console.log("data is:", data);
+
+                 /*this.setState(() => {
+                     const ar = res.results;
+                     return {
+                         admins: ar
+                     }
+                 })*/
+
+                  let arr_options = [];
+                  data.map(row=>{
+                    Object.keys(row).map(key=>{
+                      arr_options.push({value: row[key], label: row[key]})
+                    })
+                  })
+                  console.log('questions_options', arr_options)
+                  set_questions_options(arr_options);
+               });
+
         }
     }
 
@@ -64,7 +102,7 @@ function ShowPolls() {
             ).then((response) => {
                 console.log("response from flask for add_admin is:", response);
                 console.log("response.status is:", response.status);
-                if(response.status==="200"){
+                if(response.status===200){
                     alert("Poll was successfully sent to users!");
                     console.log("Poll Questions are:\n", questions);
 
@@ -90,7 +128,6 @@ function ShowPolls() {
     class ShowPollsForm extends React.Component{
         state = {
             polls_options_state: [],
-            questions_options_state: []
         };
         //questions_options, handleQuestionChange, selectedQuestion
 
@@ -131,6 +168,9 @@ function ShowPolls() {
                   //set_polls_options(arr_options);
                });
 
+
+
+
         }
 
 
@@ -139,7 +179,11 @@ function ShowPolls() {
 
         return(
           <div id="loginform">
-          <FormHeader title="Choose a Poll:"/>
+          { pollWasChosen === 0 ?
+            <FormHeader title="Choose a Poll:"/>
+          :
+            <FormHeader title="Choose a Question:"/>
+          }
           <div>
           <form onSubmit={choosePollClicked}>
 
@@ -161,11 +205,11 @@ function ShowPolls() {
            :
                <div>
                {
-                    (this.state.questions_options && this.state.questions_options.length) ?
+                    (questions_options && questions_options.length) ?
                         <Select id="selectt"
                             value={selectedQuestion}
                             onChange={handleQuestionChange}
-                            options={this.state.questions_options}
+                            options={questions_options}
                         />
                     :
                         <div></div>
@@ -186,7 +230,7 @@ function ShowPolls() {
         :
             <div>
                     <div id="button" className="row">
-                        <div id="line">Poll and Question Was Chosen</div>
+                        <div id="line"></div>
                         <div id="line"></div>
                         <div id="line"></div>
                         <button key="key-26" onClick={showQuestionClicked}>Show Question Results 📊</button>
@@ -204,7 +248,7 @@ function ShowPolls() {
     return (
     <div className="row2">
       <h1>Show Polls</h1>
-      { (pollWasChosen === 0 && questionWasChosen === 0) ?
+      { questionWasChosen === 0 ?
         <ShowPollsForm />
        :
        <h2>Now show the chart!!!!!</h2>

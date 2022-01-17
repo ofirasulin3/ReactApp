@@ -93,7 +93,7 @@ function CreatePoll() {
             ).then((response) => {
                 console.log("response from flask for add_admin is:", response);
                 console.log("response.status is:", response.status);
-                if(response.status==="200"){
+                if(response.status===200){
                     alert("Poll was added successfully");
                     console.log("Poll Questions are:\n", questions);
 
@@ -104,9 +104,6 @@ function CreatePoll() {
                     answer3 = "";
                     answer4 = "";
                     filter_answer = '1';
-
-                } else if(response.status==="409"){
-                    alert("Invalid poll arguments.");
                 } else{
                     alert("500 Internal Server Error. Please try again.");
                 }

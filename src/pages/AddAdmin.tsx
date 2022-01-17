@@ -55,13 +55,13 @@ function AddAdmin(props) {
             ).then((response) => {
                 console.log("response from flask for add_admin is:", response);
                 console.log("response.status is:", response.status);
-                if(response.status==="200"){
+                if(response.status===200){
                     console.log("username and password are valid");
                     //setUser(username);
                     alert("Admin " + username2 + " added successfully!");
                     username2 = "";
                     password2 = "";
-                } else if(response.status==="409"){
+                } else if(response.status===409){
                     alert("Admin username already exists.");
                 } else{
                     alert("500 Internal Server Error. Please try again.");

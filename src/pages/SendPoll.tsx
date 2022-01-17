@@ -45,7 +45,7 @@ function SendPoll() {
             ).then((response) => {
                 console.log("response from flask for add_admin is:", response);
                 console.log("response.status is:", response.status);
-                if(response.status==="200"){
+                if(response.status===200){
                     alert("Poll was successfully sent to users!");
                     console.log("Poll Questions are:\n", questions);
 
