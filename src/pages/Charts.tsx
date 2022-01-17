@@ -110,18 +110,14 @@
 
 
 import React, { useState } from "react";
-//import '../App.css';
-//import Dropdown from 'react-dropdown'
-import 'react-dropdown/style.css'   /* fdsfds  */
+import 'react-dropdown/style.css'
 import Select from 'react-select';
 
 function Charts() {
-    //const [user2, setUser2] = useState();
     const [filled, setFilled] = useState(0);
     const [q_list, setQ_list] = useState([]);
      const [chosen_poll, SetChosenPoll] = useState("init");
      const [polls_names, set_polls_name] = useState([]);
-    //const [expectedAnswer, setExpectedAnswer] = useState('1');
     var selectedOption;
 
 
@@ -131,9 +127,7 @@ function Charts() {
         // //check if questions is empty.
         // body: JSON.stringify(your_array)
         // //at the end:
-        // setQ_list([]);
      }
-
 
     /*const addQuestionToQuestions = async (q_to_add) => {
         var currentQuestions = q_list.slice();
@@ -148,7 +142,6 @@ function Charts() {
       {value: '3', label: '3'},
       {value: '4', label: '4'},
     ];
-
 
     //const defaultOption = options[0]
 
@@ -172,7 +165,6 @@ function Charts() {
         state = {
            polls: []
         };
-
 
         componentDidMount() {
         // fetch('https://swapi.dev/api/people/').then(data => data.json()).then(res => {
@@ -221,10 +213,6 @@ function Charts() {
             </div>
           </form>
 
-
-
-
-
         )}}
      return (
         <div className="row2">
@@ -232,7 +220,6 @@ function Charts() {
           <Charts_poll/>
         </div>
         );
-
 
 }
 

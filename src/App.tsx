@@ -14,6 +14,7 @@ import AddAdmin from "./pages/AddAdmin.tsx";
 import AdminsList from "./pages/Admins.tsx";
 import Charts from "./pages/Charts.tsx";
 import SendPoll from "./pages/SendPoll.tsx";
+import ShowPolls from "./pages/ShowPolls.tsx";
 
 function App() {
     const [user, setUser] = useState();
@@ -158,18 +159,24 @@ function App() {
                 <Link to="/">Home</Link>
                 <Link to="/add_admin">Add Admin</Link>
                 <Link to="/admins_list">Admins</Link>
+                <Link to="/create_new_poll">Create</Link>
+                <Link to="/send_poll">Send</Link>
+                <Link to="/show_polls">Show</Link>
                 <Link to="/about">About</Link>
                 <Link to="/contact_us">Contact Us</Link>
-                 <Link to="/charts">Contact Us</Link>
+                {/*<Link to="/charts">Charts</Link>*/}
             </div>
 
             <Routes>
                 <Route path='/' exact element={<Home user={user}/>} />
                 <Route path='/add_admin' exact element={<AddAdmin newAdmin={user2} setNewAdmin={setUser2} />} />
                 <Route path='/admins_list' exact element={<AdminsList/>} />
+                <Route path='/create_new_poll' exact element={<CreatePoll/>}/>
+                <Route path='/send_poll' exact element={<SendPoll/>}/>
+                <Route path='/show_polls' exact element={<ShowPolls/>}/>
                 <Route path='/about' exact element={<About/>}/>
                 <Route path='/contact_us' exact element={<ContactUs/>}/>
-                <Link to="/charts">Charts</Link>
+                {/*<Route path='/charts' exact element={<Charts/>}/>*/}
             </Routes>
         </Router>
 
@@ -190,20 +197,22 @@ function App() {
     <Router>
         <div className="Links">
             <Link to="/">Login</Link>
+            <Link to="/create_new_poll">Create</Link>
+            <Link to="/send_poll">Send</Link>
+            <Link to="/show_polls">Show</Link>
             <Link to="/about">About</Link>
             <Link to="/contact_us">Contact Us</Link>
-            <Link to="/create_new_poll">Create Poll</Link>
-            <Link to="/charts">Charts</Link>
-            <Link to="/send_poll">Send Poll</Link>
+            {/*<Link to="/charts">Charts</Link>*/}
         </div>
 
         <Routes>
             <Route path='/' exact element={<Login/>} />
+            <Route path='/create_new_poll' exact element={<CreatePoll/>}/>
+            <Route path='/send_poll' exact element={<SendPoll/>}/>
+            <Route path='/show_polls' exact element={<ShowPolls/>}/>
             <Route path='/about' exact element={<About/>}/>
             <Route path='/contact_us' exact element={<ContactUs/>}/>
-            <Route path='/create_new_poll' exact element={<CreatePoll/>}/>
-             <Route path='/charts' exact element={<Charts/>}/>
-            <Route path='/send_poll' exact element={<SendPoll/>}/>
+            {/*<Route path='/charts' exact element={<Charts/>}/>*/}
         </Routes>
     </Router>
 

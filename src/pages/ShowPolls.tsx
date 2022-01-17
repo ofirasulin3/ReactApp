@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Select from 'react-select';
 
-function SendPoll() {
+function ShowPolls() {
     //const [chose, setChose] = useState(0);
     //const [poll_name, setPoll_name] = useState();
     let filter_poll = '1';
@@ -68,7 +68,7 @@ function SendPoll() {
         <h2 id="headerTitle">{props.title}</h2>
     );
 
-    class SendPollForm extends React.Component{
+    class ShowPollsForm extends React.Component{
         state = {
             polls_options_state: []
         };
@@ -151,11 +151,11 @@ function SendPoll() {
 
     return (
     <div className="row2">
-      <h1>Send Poll</h1>
-      <SendPollForm />
+      <h1>Show Polls</h1>
+      <ShowPollsForm />
     </div>
     );
 }
 
 
-export default SendPoll;
+export default ShowPolls;
