@@ -1,7 +1,8 @@
 
-Ofir:
-* design CreateNewPoll page (and move create polls to ui)
-* fixed bug of form not empty, need to fix bug of questions_list concat
+1. create send poll page
+2. create show polls page
+
+*look at piazza before submitting project.
 
 done:
 * add state
@@ -17,3 +18,6 @@ done:
 * implement login logic (salt bug)
 * implement login logic (salt bug)
 * fix bug of form not empty
+* design CreateNewPoll page (and move create polls to ui)
+* fixed bug of questions_list concat
+* fixed bug of focus loss in poll name form

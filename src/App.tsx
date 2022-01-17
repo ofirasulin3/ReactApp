@@ -13,6 +13,7 @@ import CreatePoll from "./pages/CreatePoll.tsx";
 import AddAdmin from "./pages/AddAdmin.tsx";
 import AdminsList from "./pages/Admins.tsx";
 import Charts from "./pages/Charts.tsx";
+import SendPoll from "./pages/SendPoll.tsx";
 
 function App() {
     const [user, setUser] = useState();
@@ -193,6 +194,7 @@ function App() {
             <Link to="/contact_us">Contact Us</Link>
             <Link to="/create_new_poll">Create Poll</Link>
             <Link to="/charts">Charts</Link>
+            <Link to="/send_poll">Send Poll</Link>
         </div>
 
         <Routes>
@@ -201,6 +203,7 @@ function App() {
             <Route path='/contact_us' exact element={<ContactUs/>}/>
             <Route path='/create_new_poll' exact element={<CreatePoll/>}/>
              <Route path='/charts' exact element={<Charts/>}/>
+            <Route path='/send_poll' exact element={<SendPoll/>}/>
         </Routes>
     </Router>
 
