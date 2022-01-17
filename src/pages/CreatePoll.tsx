@@ -8,9 +8,12 @@ import Select from 'react-select';
 function CreatePoll() {
     //const [user2, setUser2] = useState();
     const [filled, setFilled] = useState(0);
+    const [poll_name_filled, setPoll_name_filled] = useState(0);
     const [q_list, setQ_list] = useState([]);
     //const [expectedAnswer, setExpectedAnswer] = useState('1');
     let question;
+    let poll_name;
+
     let answer1;
     let answer2;
     let answer3;
@@ -45,6 +48,19 @@ function CreatePoll() {
        /*setExpectedAnswer(selectedOption.value);*/
     };
 
+    const submitPollNameClicked = async e => {
+        console.log("submit poll name button clicked");
+        e.preventDefault();
+
+        if(!poll_name || (poll_name && poll_name.length===0)){
+            alert("You have to fill in poll name.");
+            return;
+        } else{
+            console.log("poll_name is:", poll_name);
+            setPoll_name_filled(1);
+        }
+    }
+
     // submiting the poll
     //concating the last question to the questions list
     //and sending all questions list to the db
@@ -61,14 +77,15 @@ function CreatePoll() {
             alert("Please Submit at least 1 question before submitting a poll.");
             return;
         }
-
+        //
         fetch('http://127.0.0.1:5000/new_poll_submitted',
                 {
-                  'methods':'GET',
-                   'headers' : {
-                    'Content-Type':'application/json'
-                   },
-                   body: JSON.stringify(q_list)
+                   method: 'POST',
+                   headers:
+                       { 'Content-Type':'application/json',
+                          'poll_name': poll_name
+                       },
+                   'body': JSON.stringify({q_list})
                 }
             ).then((response) => {
                 console.log("response from flask for add_admin is:", response);
@@ -166,7 +183,18 @@ function CreatePoll() {
           {/*<FormHeader title="Create New Poll"/>*/}
           <div>
           <form onSubmit={submitPollClicked}>
-            <div className="row">
+            { poll_name_filled===1 ? <div></div> : <div className="row3">
+                <label htmlFor="PollName">Poll Name</label>
+                <input id="PollName"
+                    key="key-10"
+                    value={poll_name}
+                    type="text"
+                    placeholder="Enter the poll name"
+                    onChange={({ target }) => {poll_name = target.value}}
+                />
+            </div> }
+
+            { poll_name_filled===0 ? <div></div> : <div className="row3">
                 <label htmlFor="Question">Question</label>
                 <input id="Question"
                     key="key-0"
@@ -175,9 +203,9 @@ function CreatePoll() {
                     placeholder="Enter the question"
                     onChange={({ target }) => {question = target.value}}
                 />
-            </div>
+            </div> }
 
-            <div className="row">
+            { poll_name_filled===0 ? <div></div> : <div className="row3">
                 <label htmlFor="Answer1">Answer 1</label>
                 <input id="Answer1"
                     key="key-1"
@@ -186,9 +214,9 @@ function CreatePoll() {
                     placeholder="1st answer"
                     onChange={({ target }) => {answer1 = target.value}}
                 />
-            </div>
+            </div> }
 
-            <div className="row">
+            { poll_name_filled===0 ? <div></div> : <div className="row3">
                 <label htmlFor="Answer2">Answer 2</label>
                 <input id="Answer2"
                     key="key-2"
@@ -197,9 +225,9 @@ function CreatePoll() {
                     placeholder="2nd answer"
                     onChange={({ target }) => {answer2 = target.value}}
                 />
-            </div>
+            </div> }
 
-            <div className="row">
+            { poll_name_filled===0 ? <div></div> : <div className="row3">
                 <label htmlFor="Answer3">Answer 3</label>
                 <input id="Answer3"
                     key="key-3"
@@ -208,9 +236,9 @@ function CreatePoll() {
                     placeholder="3rd answer (optional)"
                     onChange={({ target }) => {answer3 = target.value}}
                 />
-            </div>
+            </div> }
 
-            <div className="row">
+            { poll_name_filled===0 ? <div></div> : <div className="row3">
                 <label htmlFor="Answer4">Answer 4</label>
                 <input id="Answer4"
                     key="key-4"
@@ -230,19 +258,26 @@ function CreatePoll() {
                     options={options}
                 />
 
-            </div>
+            </div> }
 
+            { poll_name_filled===0 ? <div id="button" className="row">
+
+                <button key="key-5" onClick={submitPollNameClicked}>Submit Poll Name 📛️</button>
+                <div id="line"></div>
+            </div>
+            :
             <div id="button" className="row">
                 <div id="line"></div>
                 <div id="line"></div>
 
                 <button key="key-5" onClick={nextQuestionClicked}>Submit Question ⏭️</button>
                 <div id="line"></div>
-                <button key="key-6" type="submit" >Submit Poll 📊</button>
-            </div>
+                {q_list.length===0 ? <div></div> :
+                <button key="key-6" type="submit" >Submit Poll 📊</button> }
+            </div> }
 
           </form>
-        </div>
+            </div>
           </div>
         )
       }
