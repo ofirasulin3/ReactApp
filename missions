@@ -15,4 +15,5 @@ done:
 * understand how to communicate between UI and backend
 * add_admin logic
 * implement login logic (salt bug)
+* implement login logic (salt bug)
 * fix bug of form not empty
