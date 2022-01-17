@@ -1,26 +1,20 @@
 
 import React, { useState } from "react";
-//import '../App.css';
-//import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import Select from 'react-select';
 
-function CreatePoll() {
-    //const [user2, setUser2] = useState();
+function SendPoll() {
     const [filled, setFilled] = useState(0);
     const [poll_name_filled, setPoll_name_filled] = useState(0);
     const [q_list, setQ_list] = useState([]);
-    //const [expectedAnswer23, setExpectedAnswer] = useState('1');
     let question;
     const [poll_name, setPoll_name] = useState();
-    let poll_name_tmp;
 
     let answer1;
     let answer2;
     let answer3;
     let answer4;
     let filter_answer = '1';
-    //let questions = [];
 
     const addQuestionToQuestions = async(q_to_add) =>{
       var currentQuestions = q_list;
@@ -28,42 +22,31 @@ function CreatePoll() {
       setQ_list(currentQuestions);
     }
 
-    /*const addQuestionToQuestions = async (q_to_add) => {
-        var currentQuestions = q_list.slice();
-        currentQuestions.push(q_to_add);
-        setQ_list(currentQuestions);
-    }*/
-
-    //const options = ['1', '2', '3', '4']
     const options = [
       {value: '1', label: '1'},
       {value: '2', label: '2'},
       {value: '3', label: '3'},
       {value: '4', label: '4'},
     ];
-    //const defaultOption = options[0]
 
     const handleChange = selectedOption => {
        filter_answer = selectedOption.value;
-       //console.log('filter_answer changed:', filter_answer);
-       /*setExpectedAnswer(selectedOption.value);*/
     };
 
     const submitPollNameClicked = async e => {
         console.log("submit poll name button clicked");
         e.preventDefault();
 
-        if(!poll_name_tmp || (poll_name_tmp && poll_name_tmp.length===0)){
+        if(!poll_name || (poll_name && poll_name.length===0)){
             alert("You have to fill in poll name.");
             return;
         } else{
             console.log("poll_name is:", poll_name);
             setPoll_name_filled(1);
-            setPoll_name(poll_name_tmp);
         }
     }
 
-    // submiting the poll
+    //submiting the poll
     //concating the last question to the questions list
     //and sending all questions list to the db
     const submitPollClicked = async e => {
@@ -113,6 +96,9 @@ function CreatePoll() {
 
         //Reset questions list at the end:
         setQ_list([]);
+        setPoll_name_filled(0);
+        setPoll_name();
+        setFilled(0);
     }
 
     //concating a question to the questions list
@@ -156,11 +142,7 @@ function CreatePoll() {
             filter_answer = '1';
             console.log("q_singleton:", q_singleton)
             console.log("Questions before concat:", q_list)
-            //questions = questions.concat(q_singleton);
-            //setQ_list(q_list.concat(q_singleton));
             addQuestionToQuestions(q_singleton)
-            //setQ_list([...q_list, ...q_singleton]);
-            //questions = [...questions, ...q_singleton]
             console.log("Questions after concat:", q_list)
             console.log("Questions size after concat:", q_list.length)
             setFilled(1-filled);
@@ -171,10 +153,6 @@ function CreatePoll() {
             return;
         }
     };
-
-    /*const FormHeader = props => (
-        <h2 id="headerTitle">{props.title}</h2>
-    );*/
 
     class CreatePollForm extends React.Component{
       render(){
@@ -192,7 +170,7 @@ function CreatePoll() {
                     value={poll_name}
                     type="text"
                     placeholder="Enter the poll name"
-                    onChange={({ target }) => { poll_name_tmp = target.value}}
+                    onChange={({ target }) => {setPoll_name(target.value)}}
                 />
             </div> }
 
@@ -305,4 +283,4 @@ function CreatePoll() {
 }
 
 
-export default CreatePoll;
+export default SendPoll;
