@@ -135,21 +135,24 @@ function CreatePoll() {
             }
 
             console.log("current question is: ", question)
-
+            //let answer3val=
+            let answers_counter = 2 + (answer3 ? 1 : 0) + (answer4 ? 1 : 0);
             let q_singleton =
             {'question':question,
              'answer1':answer1,
              'answer2':answer2,
              'answer3':answer3,
              'answer4':answer4,
-             'filter_answer':filter_answer};
+             'filter_answer':filter_answer,
+             'answers_counter': answers_counter};
 
             console.log("Question: ", question, "added successfully!\n"
                            + " answer1: ", answer1, "\n"
                            + " answer2: ", answer2, "\n"
                            + " answer3: ", answer3, "\n"
                            + " answer4: ", answer4, "\n"
-                           + " filter_answer: ", filter_answer, "\n");
+                           + " filter_answer: ", filter_answer, "\n"
+                           + " answers_counter: ", answers_counter, "\n");
 
             //reset all variables.
             question = "";

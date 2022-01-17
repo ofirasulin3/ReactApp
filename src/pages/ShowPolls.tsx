@@ -3,10 +3,14 @@ import React, { useState } from "react";
 import Select from 'react-select';
 
 function ShowPolls() {
-    //const [chose, setChose] = useState(0);
+    const [pollWasChosen, setPollWasChosen] = useState(0);
+    const [questionWasChosen, setQuestionWasChosen] = useState(0);
+
     //const [poll_name, setPoll_name] = useState();
     let filter_poll = '1';
+    let filter_question = '1';
     const { selectedOption } = filter_poll;
+    const { selectedQuestion } = filter_question;
 
     /*const options = [
       {value: '1', label: '1'},
@@ -19,19 +23,34 @@ function ShowPolls() {
        filter_poll = selectedOption.value;
     };
 
-    const sendPollClicked = async e => {
+    const handleQuestionChange = selectedQuestion => {
+       filter_question = selectedQuestion.value;
+    };
+
+    const choosePollClicked = async e => {
         console.log("send poll button clicked");
         e.preventDefault();
 
-        //if(!poll_name || (poll_name && poll_name.length===0)){
         if(filter_poll==='1'){
             alert("You have to select a poll.");
             return;
         } else{
+            setPollWasChosen(1);
             console.log("chosen poll_name is:", filter_poll);
-            //setChose(1);
         }
-        //alert("Poll was successfully sent to users!");
+    }
+
+    const showQuestionClicked = async e => {
+        console.log("show question button clicked");
+        e.preventDefault();
+
+        if(filter_question==='1'){
+            alert("You have to select a question.");
+            return;
+        } else{
+            setQuestionWasChosen(1);
+            console.log("chosen question is:", filter_question);
+        }
 
         //send a request to the route that will activate the poll and send it to users
         fetch('http://127.0.0.1:5000/activate_poll',
@@ -49,9 +68,6 @@ function ShowPolls() {
                     alert("Poll was successfully sent to users!");
                     console.log("Poll Questions are:\n", questions);
 
-                    //reset all variables.
-                    filter_poll = '1';
-
                 } else{
                     alert("500 Internal Server Error. Please try again.");
                 }
@@ -59,6 +75,9 @@ function ShowPolls() {
 
         //Reset all variables.
         filter_poll='1';
+        filter_question='1';
+        setPollWasChosen(0);
+        setPollWasChosen(1);
         //setChose(0);
         //setPoll_name();
         //setChose(1-chose);
@@ -70,8 +89,10 @@ function ShowPolls() {
 
     class ShowPollsForm extends React.Component{
         state = {
-            polls_options_state: []
+            polls_options_state: [],
+            questions_options_state: []
         };
+        //questions_options, handleQuestionChange, selectedQuestion
 
         componentDidMount() {
          /*fetch('https://swapi.dev/api/people/').then(data => data.json()).then(res => {
@@ -120,27 +141,58 @@ function ShowPolls() {
           <div id="loginform">
           <FormHeader title="Choose a Poll:"/>
           <div>
-          <form onSubmit={sendPollClicked}>
+          <form onSubmit={choosePollClicked}>
 
              <div className="row3">
-               { (this.state.polls_options_state && this.state.polls_options_state.length) ?
-                <Select id="selectt"
-                    value={selectedOption}
-                    //defaultValue={this.state.polls_options_state[0]}
-                    onChange={handleChange}
-                    options={this.state.polls_options_state}
-                />
-                : <div></div> }
+
+      { pollWasChosen === 0 ?
+               <div>
+               {
+                    (this.state.polls_options_state && this.state.polls_options_state.length) ?
+                        <Select id="selectt"
+                            value={selectedOption}
+                            onChange={handleChange}
+                            options={this.state.polls_options_state}
+                        />
+                    :
+                        <div></div>
+               }
+               </div>
+           :
+               <div>
+               {
+                    (this.state.questions_options && this.state.questions_options.length) ?
+                        <Select id="selectt"
+                            value={selectedQuestion}
+                            onChange={handleQuestionChange}
+                            options={this.state.questions_options}
+                        />
+                    :
+                        <div></div>
+               }
+               </div>
+       }
 
             </div>
             <div id="line2"></div>
 
+      { pollWasChosen === 0 ?
             <div id="button" className="row">
                 <div id="line"></div>
                 <div id="line"></div>
                 <div id="line"></div>
-                <button key="key-6" type="submit" >Send Poll! 📤</button>
+                <button key="key-36" type="submit">Choose This Poll 👆</button>
             </div>
+        :
+            <div>
+                    <div id="button" className="row">
+                        <div id="line">Poll and Question Was Chosen</div>
+                        <div id="line"></div>
+                        <div id="line"></div>
+                        <button key="key-26" onClick={showQuestionClicked}>Show Question Results 📊</button>
+                    </div>
+            </div>
+        }
 
           </form>
             </div>
@@ -152,7 +204,12 @@ function ShowPolls() {
     return (
     <div className="row2">
       <h1>Show Polls</h1>
-      <ShowPollsForm />
+      { (pollWasChosen === 0 && questionWasChosen === 0) ?
+        <ShowPollsForm />
+       :
+       <h2>Now show the chart!!!!!</h2>
+      }
+
     </div>
     );
 }
