@@ -12,7 +12,8 @@ function CreatePoll() {
     const [q_list, setQ_list] = useState([]);
     //const [expectedAnswer, setExpectedAnswer] = useState('1');
     let question;
-    let poll_name;
+    const [poll_name, setPoll_name] = useState();
+    //let poll_name;
 
     let answer1;
     let answer2;
@@ -77,15 +78,15 @@ function CreatePoll() {
             alert("Please Submit at least 1 question before submitting a poll.");
             return;
         }
-        //
-        fetch('http://127.0.0.1:5000/new_poll_submitted',
+        console.log("poll_name BEFORE fetch:", poll_name);
+        fetch('http://127.0.0.1:5000/newpoll',
                 {
                    method: 'POST',
                    headers:
                        { 'Content-Type':'application/json',
-                          'poll_name': poll_name
+                          'poll_name': poll_name,
+                          'body': JSON.stringify(q_list)
                        },
-                   'body': JSON.stringify({q_list})
                 }
             ).then((response) => {
                 console.log("response from flask for add_admin is:", response);
@@ -131,12 +132,12 @@ function CreatePoll() {
             console.log("current question is: ", question)
 
             let q_singleton =
-            [{'question':question,
+            {'question':question,
              'answer1':answer1,
              'answer2':answer2,
              'answer3':answer3,
              'answer4':answer4,
-             'filter_answer':filter_answer}];
+             'filter_answer':filter_answer};
 
             console.log("Question: ", question, "added successfully!\n"
                            + " answer1: ", answer1, "\n"
@@ -190,7 +191,7 @@ function CreatePoll() {
                     value={poll_name}
                     type="text"
                     placeholder="Enter the poll name"
-                    onChange={({ target }) => {poll_name = target.value}}
+                    onChange={({ target }) => {setPoll_name(target.value)}}
                 />
             </div> }
 
