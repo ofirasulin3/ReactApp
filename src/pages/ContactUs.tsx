@@ -6,7 +6,7 @@ const ContactUs = () => {
     <div class="row2">
       <h1>Contact Us</h1>
       <p className="about">We are students at the Computer Science Faculty
-          in the Technion - Israel Institute Of Technology.
+          in the ‍🎓 Technion - Israel Institute Of Technology.
           For more details and collaborations, Contact us at:
       </p>
       <p>
@@ -14,7 +14,7 @@ const ContactUs = () => {
         <a href="mailto:el.vitaly@campus.technion.ac.il">el.vitaly@campus.technion</a>
       </p>
       <p>
-          The github link for this project:
+          The github 🗃️ link for this project:
           <a href="https://github.com/ofirasulin3/ReactApp">github.com/ofirasulin3/ReactApp</a>
       </p>
 

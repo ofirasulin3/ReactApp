@@ -1,8 +1,7 @@
 
-import React, { useState } from "react";
-//import LoginForm from "react";
+import React from "react";
 import '../App.css';
-import user2 from '../App.css';
+//import user2 from '../App.css';
 
 function AddAdmin(props) {
     //const [user2, setUser2] = useState();
@@ -56,13 +55,13 @@ function AddAdmin(props) {
             ).then((response) => {
                 console.log("response from flask for add_admin is:", response);
                 console.log("response.status is:", response.status);
-                if(response.status=="200"){
+                if(response.status==="200"){
                     console.log("username and password are valid");
                     //setUser(username);
                     alert("Admin " + username2 + " added successfully!");
                     username2 = "";
                     password2 = "";
-                } else if(response.status=="409"){
+                } else if(response.status==="409"){
                     alert("Admin username already exists.");
                 } else{
                     alert("500 Internal Server Error. Please try again.");
@@ -109,7 +108,7 @@ function AddAdmin(props) {
                 />
             </div>
             <div id="button" className="row">
-                <button key="key6" type="submit">Sign Up Admin</button>
+                <button key="key6" type="submit">Sign Up Admin ✍️</button>
             </div>
           </form>
         </div>
