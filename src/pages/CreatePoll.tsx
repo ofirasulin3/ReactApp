@@ -1,16 +1,12 @@
 
 import React, { useState } from "react";
-//import '../App.css';
-//import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import Select from 'react-select';
 
 function CreatePoll() {
-    //const [user2, setUser2] = useState();
     const [filled, setFilled] = useState(0);
     const [poll_name_filled, setPoll_name_filled] = useState(0);
     const [q_list, setQ_list] = useState([]);
-    //const [expectedAnswer, setExpectedAnswer] = useState('1');
     let question;
     const [poll_name, setPoll_name] = useState();
     //let poll_name;
@@ -20,21 +16,13 @@ function CreatePoll() {
     let answer3;
     let answer4;
     let filter_answer = '1';
-    //let questions = [];
 
     const addQuestionToQuestions = async(q_to_add) =>{
-      var currentQuestions = q_list;
+      var currentQuestions = q_list;//.slice();
       currentQuestions.push(q_to_add);
       setQ_list(currentQuestions);
     }
 
-    /*const addQuestionToQuestions = async (q_to_add) => {
-        var currentQuestions = q_list.slice();
-        currentQuestions.push(q_to_add);
-        setQ_list(currentQuestions);
-    }*/
-
-    //const options = ['1', '2', '3', '4']
     const options = [
       {value: '1', label: '1'},
       {value: '2', label: '2'},
@@ -45,8 +33,6 @@ function CreatePoll() {
 
     const handleChange = selectedOption => {
        filter_answer = selectedOption.value;
-       //console.log('filter_answer changed:', filter_answer);
-       /*setExpectedAnswer(selectedOption.value);*/
     };
 
     const submitPollNameClicked = async e => {
@@ -62,7 +48,7 @@ function CreatePoll() {
         }
     }
 
-    // submiting the poll
+    //submiting the poll
     //concating the last question to the questions list
     //and sending all questions list to the db
     const submitPollClicked = async e => {
@@ -112,6 +98,8 @@ function CreatePoll() {
 
         //Reset questions list at the end:
         setQ_list([]);
+        setPoll_name();
+        setPoll_name_filled(0);
     }
 
     //concating a question to the questions list
@@ -154,16 +142,13 @@ function CreatePoll() {
             answer4 = "";
             filter_answer = '1';
             console.log("q_singleton:", q_singleton)
+
             console.log("Questions before concat:", q_list)
-            //questions = questions.concat(q_singleton);
-            //setQ_list(q_list.concat(q_singleton));
             addQuestionToQuestions(q_singleton)
-            //setQ_list([...q_list, ...q_singleton]);
-            //questions = [...questions, ...q_singleton]
             console.log("Questions after concat:", q_list)
+
             console.log("Questions size after concat:", q_list.length)
             setFilled(1-filled);
-
         }
         else{
             alert("Please fill in all mandatory fields");
@@ -171,9 +156,6 @@ function CreatePoll() {
         }
     };
 
-    /*const FormHeader = props => (
-        <h2 id="headerTitle">{props.title}</h2>
-    );*/
 
     class CreatePollForm extends React.Component{
       render(){
