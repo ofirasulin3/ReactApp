@@ -1,26 +1,12 @@
 
 import React, { useState } from "react";
-import 'react-dropdown/style.css'
+//import 'react-dropdown/style.css'
 import Select from 'react-select';
 
 function SendPoll() {
-    const [filled, setFilled] = useState(0);
-    const [poll_name_filled, setPoll_name_filled] = useState(0);
-    const [q_list, setQ_list] = useState([]);
-    let question;
+    const [chose, setChose] = useState(0);
     const [poll_name, setPoll_name] = useState();
-
-    let answer1;
-    let answer2;
-    let answer3;
-    let answer4;
-    let filter_answer = '1';
-
-    const addQuestionToQuestions = async(q_to_add) =>{
-      var currentQuestions = q_list;
-      currentQuestions.push(q_to_add);
-      setQ_list(currentQuestions);
-    }
+    let filter_poll = '1';
 
     const options = [
       {value: '1', label: '1'},
@@ -30,42 +16,27 @@ function SendPoll() {
     ];
 
     const handleChange = selectedOption => {
-       filter_answer = selectedOption.value;
+       filter_poll = selectedOption.value;
     };
 
-    const submitPollNameClicked = async e => {
-        console.log("submit poll name button clicked");
+    const sendPollClicked = async e => {
+        console.log("send poll button clicked");
         e.preventDefault();
 
         if(!poll_name || (poll_name && poll_name.length===0)){
-            alert("You have to fill in poll name.");
+            alert("You have to select a poll.");
             return;
-        } else{
+        }
+        else{
             console.log("poll_name is:", poll_name);
-            setPoll_name_filled(1);
+            setChose(1);
         }
-    }
+        alert("Poll was successfully sent to users!");
 
-    //submiting the poll
-    //concating the last question to the questions list
-    //and sending all questions list to the db
-    const submitPollClicked = async e => {
-        console.log("submit poll button clicked");
-        e.preventDefault();
-
-        if(question && answer1 && answer2){
-            alert("Please Submit the question before submitting poll.");
-            return;
-        }
-        //check if questions is empty.
-        if(q_list.length===0){
-            alert("Please Submit at least 1 question before submitting a poll.");
-            return;
-        }
-        console.log("poll_name BEFORE fetch:", poll_name);
+        //send a request to the route that will cause to send the poll
         fetch('http://127.0.0.1:5000/newpoll',
                 {
-                   method: 'POST',
+                   method: 'GET',
                    headers:
                        { 'Content-Type':'application/json',
                           'poll_name': poll_name,
@@ -76,7 +47,7 @@ function SendPoll() {
                 console.log("response from flask for add_admin is:", response);
                 console.log("response.status is:", response.status);
                 if(response.status==="200"){
-                    alert("Poll was added successfully");
+                    alert("Poll was successfully sent to users!");
                     console.log("Poll Questions are:\n", questions);
 
                     //reset all variables.
@@ -85,7 +56,7 @@ function SendPoll() {
                     answer2 = "";
                     answer3 = "";
                     answer4 = "";
-                    filter_answer = '1';
+                    filter_poll = '1';
 
                 } else if(response.status==="409"){
                     alert("Invalid poll arguments.");
@@ -94,167 +65,43 @@ function SendPoll() {
                 }
                }).catch(error => console.log(error, error));
 
-        //Reset questions list at the end:
+        //Reset all variables.
         setQ_list([]);
-        setPoll_name_filled(0);
+        setChose(0);
         setPoll_name();
-        setFilled(0);
+        //setChose(1-chose);
     }
 
-    //concating a question to the questions list
-    const nextQuestionClicked = async e => {
-        console.log("next question button clicked");
-        e.preventDefault();
+    const FormHeader = props => (
+        <h2 id="headerTitle">{props.title}</h2>
+    );
 
-        if(answer1 && answer2 && question){
-            if((answer1 && answer1.length===0) || (answer2 && answer2.length===0)){
-               alert("You have to fill in answers 1 and 2");
-               return;
-            }
-            if((answer4 && !answer3) || (answer4 && answer3 && answer3.length===0 && answer4.length>0)){
-               alert("You have to fill in answer 3 before answer 4");
-               return;
-            }
-
-            console.log("current question is: ", question)
-
-            let q_singleton =
-            {'question':question,
-             'answer1':answer1,
-             'answer2':answer2,
-             'answer3':answer3,
-             'answer4':answer4,
-             'filter_answer':filter_answer};
-
-            console.log("Question: ", question, "added successfully!\n"
-                           + " answer1: ", answer1, "\n"
-                           + " answer2: ", answer2, "\n"
-                           + " answer3: ", answer3, "\n"
-                           + " answer4: ", answer4, "\n"
-                           + " filter_answer: ", filter_answer, "\n");
-
-            //reset all variables.
-            question = "";
-            answer1 = "";
-            answer2 = "";
-            answer3 = "";
-            answer4 = "";
-            filter_answer = '1';
-            console.log("q_singleton:", q_singleton)
-            console.log("Questions before concat:", q_list)
-            addQuestionToQuestions(q_singleton)
-            console.log("Questions after concat:", q_list)
-            console.log("Questions size after concat:", q_list.length)
-            setFilled(1-filled);
-
-        }
-        else{
-            alert("Please fill in all mandatory fields");
-            return;
-        }
-    };
-
-    class CreatePollForm extends React.Component{
+    class SendPollForm extends React.Component{
       render(){
-        const { selectedOption } = filter_answer;
+        const { selectedOption } = filter_poll;
 
         return(
           <div id="loginform">
-          {/*<FormHeader title="Create New Poll"/>*/}
+          <FormHeader title="Choose a Poll:"/>
           <div>
-          <form onSubmit={submitPollClicked}>
-            { poll_name_filled===1 ? <div></div> : <div className="row3">
-                <label htmlFor="PollName">Poll Name</label>
-                <input id="PollName"
-                    key="key-10"
-                    value={poll_name}
-                    type="text"
-                    placeholder="Enter the poll name"
-                    onChange={({ target }) => {setPoll_name(target.value)}}
-                />
-            </div> }
-
-            { poll_name_filled===0 ? <div></div> : <div className="row3">
-                <label htmlFor="Question">Question</label>
-                <input id="Question"
-                    key="key-0"
-                    value={question}
-                    type="text"
-                    placeholder="Enter the question"
-                    onChange={({ target }) => {question = target.value}}
-                />
-            </div> }
-
-            { poll_name_filled===0 ? <div></div> : <div className="row3">
-                <label htmlFor="Answer1">Answer 1</label>
-                <input id="Answer1"
-                    key="key-1"
-                    value={answer1}
-                    type="text"
-                    placeholder="1st answer"
-                    onChange={({ target }) => {answer1 = target.value}}
-                />
-            </div> }
-
-            { poll_name_filled===0 ? <div></div> : <div className="row3">
-                <label htmlFor="Answer2">Answer 2</label>
-                <input id="Answer2"
-                    key="key-2"
-                    value={answer2}
-                    type="text"
-                    placeholder="2nd answer"
-                    onChange={({ target }) => {answer2 = target.value}}
-                />
-            </div> }
-
-            { poll_name_filled===0 ? <div></div> : <div className="row3">
-                <label htmlFor="Answer3">Answer 3</label>
-                <input id="Answer3"
-                    key="key-3"
-                    value={answer3}
-                    type="text"
-                    placeholder="3rd answer (optional)"
-                    onChange={({ target }) => {answer3 = target.value}}
-                />
-            </div> }
-
-            { poll_name_filled===0 ? <div></div> : <div className="row3">
-                <label htmlFor="Answer4">Answer 4</label>
-                <input id="Answer4"
-                    key="key-4"
-                    value={answer4}
-                    type="text"
-                    placeholder="4th answer (optional)"
-                    onChange={({ target }) => {answer4 = target.value}}
-                />
-                <div id="line"></div>
-
-                <div id="line2">Number of filtering answer:</div>
-
+          <form onSubmit={sendPollClicked}>
+           <div className="row3">
                 <Select id="selectt"
                     value={selectedOption}
-                    defaultValue={{value: '1', label: '1'}}
+                    /*defaultValue={{value: '1', label: '1'}}*/
                     onChange={handleChange}
                     options={options}
                 />
 
-            </div> }
-
-            { poll_name_filled===0 ? <div id="button" className="row">
-
-                <button key="key-5" onClick={submitPollNameClicked}>Submit Poll Name 📛️</button>
-                <div id="line"></div>
             </div>
-            :
+            <div id="line2"></div>
+
             <div id="button" className="row">
                 <div id="line"></div>
                 <div id="line"></div>
-
-                <button key="key-5" onClick={nextQuestionClicked}>Submit Question ⏭️</button>
                 <div id="line"></div>
-                {q_list.length===0 ? <div></div> :
-                <button key="key-6" type="submit" >Submit Poll 📊</button> }
-            </div> }
+                <button key="key-6" type="submit" >Send Poll! 📤</button>
+            </div>
 
           </form>
             </div>
@@ -263,23 +110,12 @@ function SendPoll() {
       }
     }
 
-    /*if(username2 && username2!==""){
-    console.log("username2 is not null: ", username2);
-        return (
-        <div className="row2">
-          <h1>Create New Poll</h1>
-
-        </div>
-        );
-    }
-    else{*/
-        return (
-        <div className="row2">
-          <h1>Create New Poll</h1>
-          <CreatePollForm />
-        </div>
-        );
-    //}
+    return (
+    <div className="row2">
+      <h1>Send Poll</h1>
+      <SendPollForm />
+    </div>
+    );
 }
 
 

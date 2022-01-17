@@ -57,9 +57,10 @@ function CreatePoll() {
             alert("You have to fill in poll name.");
             return;
         } else{
+            console.log("poll_name_tmp is:", poll_name_tmp);
+            setPoll_name(poll_name_tmp);
             console.log("poll_name is:", poll_name);
             setPoll_name_filled(1);
-            setPoll_name(poll_name_tmp);
         }
     }
 
@@ -113,6 +114,9 @@ function CreatePoll() {
 
         //Reset questions list at the end:
         setQ_list([]);
+        setPoll_name();
+        setPoll_name_filled(0);
+        setFilled(0);
     }
 
     //concating a question to the questions list

@@ -230,7 +230,7 @@ function Charts() {
         )}}
      return (
         <div className="row2">
-          <h1>Create New Poll</h1>
+          <h1>Show Polls Charts</h1>
           <Charts_poll/>
         </div>
         );
