@@ -132,7 +132,7 @@ function Charts() {
         // body: JSON.stringify(your_array)
         // //at the end:
         // setQ_list([]);
-    }
+     }
 
 
     /*const addQuestionToQuestions = async (q_to_add) => {
@@ -169,9 +169,9 @@ function Charts() {
     }
 
     class Charts_poll extends React.Component{
-     state = {
-        polls: []
-    };
+        state = {
+           polls: []
+        };
 
 
         componentDidMount() {
@@ -190,21 +190,19 @@ function Charts() {
                     'Accept': 'application/json'
                 }
             }).then((response) => response.json()).then((data) =>
-          {
+              {
+                  let mydata = [];
+                  data.map(row=>{
+                    Object.keys(row).map(key=>{
+                      mydata.push({key,value:row[key]})
+                    })
+                  })
 
+                  set_polls_name(mydata);
+                  console.log('polls_name', polls_names)
+               });
 
-              let mydata = [];
-              data.map(row=>{
-                Object.keys(row).map(key=>{
-                  mydata.push({key,value:row[key]})
-                })
-              })
-
-              set_polls_name(mydata);
-              console.log('polls_name', polls_names)
-           });
-
-    }
+        }
       render(){
          // const { selectedOption } = chosen_poll;
 
