@@ -104,7 +104,14 @@ function CreatePoll() {
                     answer3 = "";
                     answer4 = "";
                     filter_answer = '1';
-                } else{
+                }
+                else if (response.status===409)
+                {
+                      alert("poll name:" + poll_name + " already exists , please choose different name");
+
+                }
+
+                else{
                     alert("500 Internal Server Error. Please try again.");
                 }
                }).catch(error => console.log(error, error));
