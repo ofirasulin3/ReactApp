@@ -56,15 +56,40 @@ function CreatePoll() {
         if(!poll_name_tmp || (poll_name_tmp && poll_name_tmp.length===0)){
             alert("You have to fill in poll name.");
             return;
-        } else{
+        }
+        else{
             console.log("poll_name_tmp is:", poll_name_tmp);
-            setPoll_name(poll_name_tmp);
-            console.log("poll_name is:", poll_name);
-            setPoll_name_filled(1);
+
+            fetch('http://127.0.0.1:5000/is_poll_exists',
+                    {
+                       method: 'GET',
+                       headers:
+                           {
+                              'Content-Type':'application/json',
+                              'poll_name': poll_name_tmp,
+                           },
+                    }
+                ).then((response) => {
+                    console.log("response from flask for add_admin is:", response);
+                    console.log("response.status is:", response.status);
+                    if(response.status===200){
+                        console.log("Poll name is valid.");
+
+                        setPoll_name(poll_name_tmp);
+                        console.log("poll_name is:", poll_name);
+                        setPoll_name_filled(1);
+                        //reset all variables.
+                    } else if (response.status===409) {
+                          alert("This poll name (\""+ poll_name_tmp + "\") already exists.\nPlease choose another name.");
+                    }
+                    else{
+                        alert("500 Internal Server Error. Please try again.");
+                    }
+                   }).catch(error => console.log(error, error));
         }
     }
 
-    // submiting the poll
+    //submitting the poll
     //concating the last question to the questions list
     //and sending all questions list to the db
     const submitPollClicked = async e => {
@@ -104,13 +129,9 @@ function CreatePoll() {
                     answer3 = "";
                     answer4 = "";
                     filter_answer = '1';
+                } else if (response.status===409) {
+                      alert("This poll name." + poll_name + " already exists , please choose different name");
                 }
-                else if (response.status===409)
-                {
-                      alert("poll name:" + poll_name + " already exists , please choose different name");
-
-                }
-
                 else{
                     alert("500 Internal Server Error. Please try again.");
                 }

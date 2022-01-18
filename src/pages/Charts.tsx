@@ -1,115 +1,113 @@
-// import React, { Component } from "react";
-// import "./styles.css";
-// import * as am5 from "@amcharts/amcharts5";
-// import * as am5xy from "@amcharts/amcharts5/xy";
-// import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-//
-// class Charts extends Component {
-//   componentDidMount() {
-//     let root = am5.Root.new("chartdiv");
-//
-//     root.setThemes([am5themes_Animated.new(root)]);
-//
-//     let chart = root.container.children.push(
-//       am5xy.XYChart.new(root, {
-//         panY: false,
-//         layout: root.verticalLayout
-//       })
-//     );
-//
-//     // Define data
-//     let data = [
-//       {
-//         category: "Research",
-//         value1: 1000,
-//         value2: 10
-//       },
-//       {
-//         category: "Marketing",
-//         value1: 1200,
-//         value2: 100
-//       },
-//       {
-//         category: "Sales",
-//         value1: 850,
-//         value2: 1
-//       }
-//     ];
-//
-//     // Create Y-axis
-//     let yAxis = chart.yAxes.push(
-//       am5xy.ValueAxis.new(root, {
-//         renderer: am5xy.AxisRendererY.new(root, {})
-//       })
-//     );
-//
-//     // Create X-Axis
-//     let xAxis = chart.xAxes.push(
-//       am5xy.CategoryAxis.new(root, {
-//         renderer: am5xy.AxisRendererX.new(root, {}),
-//         categoryField: "category"
-//       })
-//     );
-//     xAxis.data.setAll(data);
-//
-//     // Create series
-//     let series1 = chart.series.push(
-//       am5xy.ColumnSeries.new(root, {
-//         name: "Series",
-//         xAxis: xAxis,
-//         yAxis: yAxis,
-//         valueYField: "value1",
-//         categoryXField: "category"
-//       })
-//     );
-//     series1.data.setAll(data);
-//
-//     let series2 = chart.series.push(
-//       am5xy.ColumnSeries.new(root, {
-//         name: "Series",
-//         xAxis: xAxis,
-//         yAxis: yAxis,
-//         valueYField: "value2",
-//         categoryXField: "category"
-//       })
-//     );
-//     series2.data.setAll(data);
-//
-//     // Add legend
-//     let legend = chart.children.push(am5.Legend.new(root, {}));
-//     legend.data.setAll(chart.series.values);
-//
-//     // Add cursor
-//     chart.set("cursor", am5xy.XYCursor.new(root, {}));
-//
-//     this.root = root;
-//   }
-//
-//   componentWillUnmount() {
-//     if (this.root) {
-//       this.root.dispose();
-//     }
-//   }
-//
-//   render() {
-//     return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
-//   }
-// }
-//
-// export default Charts;
-//
-//
-//
-//
-//
-//
-//
+ import React, { Component } from "react";
+ import * as am5 from "@amcharts/amcharts5";
+ import * as am5xy from "@amcharts/amcharts5/xy";
+ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+
+ class Charts extends Component {
+   componentDidMount() {
+     let root = am5.Root.new("chartdiv");
+
+     root.setThemes([am5themes_Animated.new(root)]);
+
+     let chart = root.container.children.push(
+       am5xy.XYChart.new(root, {
+         panY: false,
+         layout: root.verticalLayout
+       })
+     );
+
+     // Define data
+     let data = [
+       {
+         category: "answer 1",//answer 1
+         value1: 1000,
+         value2: 10
+       },
+       {
+         category: "answer 2",//answer 2
+         value1: 1200,
+         value2: 100
+       },
+       {
+         category: "answer 3", //answer 3 optional
+         value1: 850,
+         value2: 1
+       },
+       {
+         category: "answer 4", //answer 4 optional
+         value1: 850,
+         value2: 1
+       }
+     ];
+
+     // Create Y-axis
+     let yAxis = chart.yAxes.push(
+       am5xy.ValueAxis.new(root, {
+         renderer: am5xy.AxisRendererY.new(root, {})
+       })
+     );
+
+     // Create X-Axis
+     let xAxis = chart.xAxes.push(
+       am5xy.CategoryAxis.new(root, {
+         renderer: am5xy.AxisRendererX.new(root, {}),
+         categoryField: "answer"
+       })
+     );
+     xAxis.data.setAll(data);
+
+     // Create series
+     let series1 = chart.series.push(
+       am5xy.ColumnSeries.new(root, {
+         name: "Series",
+         xAxis: xAxis,
+         yAxis: yAxis,
+         valueYField: "value1",
+         categoryXField: "category"
+       })
+     );
+     series1.data.setAll(data);
+
+     let series2 = chart.series.push(
+       am5xy.ColumnSeries.new(root, {
+         name: "Series",
+         xAxis: xAxis,
+         yAxis: yAxis,
+         valueYField: "value2",
+         categoryXField: "category"
+       })
+     );
+     series2.data.setAll(data);
+
+     // Add legend
+     let legend = chart.children.push(am5.Legend.new(root, {}));
+     legend.data.setAll(chart.series.values);
+
+     // Add cursor
+     chart.set("cursor", am5xy.XYCursor.new(root, {}));
+
+     this.root = root;
+   }
+
+   componentWillUnmount() {
+     if (this.root) {
+       this.root.dispose();
+     }
+   }
+
+   render() {
+     return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
+   }
+ }
+
+ export default Charts;
 
 
 
 
 
-import React, { useState } from "react";
+
+/*import React, { useState } from "react";
 import 'react-dropdown/style.css'
 import Select from 'react-select';
 
@@ -129,11 +127,11 @@ function Charts() {
         // //at the end:
      }
 
-    /*const addQuestionToQuestions = async (q_to_add) => {
-        var currentQuestions = q_list.slice();
-        currentQuestions.push(q_to_add);
-        setQ_list(currentQuestions);
-    }*/
+    //const addQuestionToQuestions = async (q_to_add) => {
+    //    var currentQuestions = q_list.slice();
+    //    currentQuestions.push(q_to_add);
+    //    setQ_list(currentQuestions);
+    //}
 
     //const options = ['1', '2', '3', '4']
     const options = [
@@ -148,7 +146,7 @@ function Charts() {
     const handleChange = selectedOption => {
        SetChosenPoll(selectedOption);
        //console.log('filter_answer changed:', filter_answer);
-       /*setExpectedAnswer(selectedOption.value);*/
+       //setExpectedAnswer(selectedOption.value);
     };
 
     // submiting the poll
@@ -204,7 +202,7 @@ function Charts() {
             <div className="row">
             <div id="line2">Select Poll:
             <Select id="selectt"
-                    value={selectedOption}  /* chosen value */
+                    value={selectedOption}
                     // defaultValue={{value: '1', label: '1'}}
                     onChange={handleChange}
                     options={polls_names}
@@ -224,4 +222,4 @@ function Charts() {
 }
 
 
-export default Charts;
+export default Charts;*/

@@ -50,11 +50,13 @@ function ShowPolls() {
                     }
                 }
             )
-            .then((response) => {
+            .then((response) => response.json())
+            /*.then((response) => {
                 console.log("response from flask is:", response);
-                response.json();
-                console.log("json response is:", response);
-            })
+                //response.json();
+                console.log("json response is:", response.json());
+                //console.log("json response is:", response);
+            })*/
              .then((data) => {
               console.log("data is:", data);
 
@@ -66,12 +68,16 @@ function ShowPolls() {
                  })*/
 
                   let arr_options = [];
-                  data.map(row=>{
+                  for(let i = 0; i< data.length; i++){
+                      arr_options.push({value: data[i], label: data[i]});
+                  }
+
+                  /*data.map(row=>{
                     Object.keys(row).map(key=>{
                       arr_options.push({value: row[key], label: row[key]})
                     })
-                  })
-                  console.log('questions_options', arr_options)
+                  })*/
+                  console.log('questions_options', arr_options);
                   set_questions_options(arr_options);
                });
 
@@ -105,7 +111,6 @@ function ShowPolls() {
                 if(response.status===200){
                     alert("Poll was successfully sent to users!");
                     console.log("Poll Questions are:\n", questions);
-
                 } else{
                     alert("500 Internal Server Error. Please try again.");
                 }
