@@ -16,27 +16,23 @@
        })
      );
 
-     // Define data
+     //Define data
      let data = [
        {
-         category: "answer1",//answer 1
-         value1: 1000,
-         value2: 10
+         answer: "answer1",//answer 1
+         votes: 3000
        },
        {
-         category: "answer2",//answer 2
-         value1: 1200,
-         value2: 100
+         answer: "answer2",//answer 2
+         votes: 1200
        },
        {
-         category: "answer3", //answer 3 optional
-         value1: 850,
-         value2: 1
+         answer: "answer3", //answer 3 optional
+         votes: 850
        },
        {
-         category: "answer4", //answer 4 optional
-         value1: 850,
-         value2: 1
+         answer: "answer4", //answer 4 optional
+         votes: 850
        }
      ];
 
@@ -59,16 +55,16 @@
      // Create series
      let series1 = chart.series.push(
        am5xy.ColumnSeries.new(root, {
-         name: "Series",
+         name: "Question",
          xAxis: xAxis,
          yAxis: yAxis,
-         valueYField: "value1",
-         categoryXField: "category"
+         valueYField: "votes",
+         categoryXField: "answer"
        })
      );
      series1.data.setAll(data);
 
-     let series2 = chart.series.push(
+     /*let series2 = chart.series.push(
        am5xy.ColumnSeries.new(root, {
          name: "Series",
          xAxis: xAxis,
@@ -77,7 +73,7 @@
          categoryXField: "category"
        })
      );
-     series2.data.setAll(data);
+     series2.data.setAll(data);*/
 
      // Add legend
      let legend = chart.children.push(am5.Legend.new(root, {}));
@@ -98,9 +94,7 @@
    render() {
      //<div id="chartdiv" style={{ width: "60%", height: "450px" }}></div>
      return (
-        <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
-        /*<div id="chartdiv"></div>*/
-
+        <div id="chartdiv" style={{ width: "100%", height: "440px" }}></div>
     );
 
 

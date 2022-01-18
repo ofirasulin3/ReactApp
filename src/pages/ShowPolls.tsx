@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import Select from 'react-select';
+import Chart from "./Chart.tsx";
 
 function ShowPolls() {
     const [pollWasChosen, setPollWasChosen] = useState(0);
@@ -250,13 +251,19 @@ function ShowPolls() {
       }
     }
 
+
     return (
-    <div className="row2">
-      <h1>Show Polls</h1>
+    <div>
+        <div className="row2">
+            <h1>Show Results</h1>
+        </div>
       { questionWasChosen === 0 ?
-        <ShowPollsForm />
+            <ShowPollsForm />
        :
-       <h2>Now show the chart!!!!!</h2>
+           <div id="chartfatherdiv">
+               <h2 id="transparent_h2">Number of votes per answer: Number of votes per answer:</h2>
+               <Chart/>
+           </div>
       }
 
     </div>

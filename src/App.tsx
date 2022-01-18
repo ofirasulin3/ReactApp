@@ -164,7 +164,7 @@ function App() {
                 <Link to="/show_polls">Show</Link>
                 <Link to="/about">About</Link>
                 <Link to="/contact_us">Contact Us</Link>
-                <Link to="/chart">Chart</Link>
+                <Link to="/chart">Charts</Link>
             </div>
 
             <Routes>
