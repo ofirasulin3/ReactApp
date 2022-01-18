@@ -1,10 +1,4 @@
 
-1. create send poll page
-2. create show polls page
-
-*look at piazza before submitting project.
-*move pages to after login
-
 done:
 * add state
 * center logo
@@ -22,3 +16,4 @@ done:
 * design CreateNewPoll page (and move create polls to ui)
 * fixed bug of questions_list concat
 * fixed bug of focus loss in poll name form
+* create send poll page

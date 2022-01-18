@@ -3,7 +3,7 @@
  import * as am5xy from "@amcharts/amcharts5/xy";
  import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
- class Charts extends Component {
+ class Chart extends Component {
    componentDidMount() {
      let root = am5.Root.new("chartdiv");
 
@@ -19,22 +19,22 @@
      // Define data
      let data = [
        {
-         category: "answer 1",//answer 1
+         category: "answer1",//answer 1
          value1: 1000,
          value2: 10
        },
        {
-         category: "answer 2",//answer 2
+         category: "answer2",//answer 2
          value1: 1200,
          value2: 100
        },
        {
-         category: "answer 3", //answer 3 optional
+         category: "answer3", //answer 3 optional
          value1: 850,
          value2: 1
        },
        {
-         category: "answer 4", //answer 4 optional
+         category: "answer4", //answer 4 optional
          value1: 850,
          value2: 1
        }
@@ -96,11 +96,18 @@
    }
 
    render() {
-     return <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>;
+     //<div id="chartdiv" style={{ width: "60%", height: "450px" }}></div>
+     return (
+        <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div>
+        /*<div id="chartdiv"></div>*/
+
+    );
+
+
    }
  }
 
- export default Charts;
+ export default Chart;
 
 
 

@@ -12,7 +12,7 @@ import ContactUs from "./pages/ContactUs.tsx";
 import CreatePoll from "./pages/CreatePoll.tsx";
 import AddAdmin from "./pages/AddAdmin.tsx";
 import AdminsList from "./pages/Admins.tsx";
-import Charts from "./pages/Charts.tsx";
+import Chart from "./pages/Chart.tsx";
 import SendPoll from "./pages/SendPoll.tsx";
 import ShowPolls from "./pages/ShowPolls.tsx";
 
@@ -164,7 +164,7 @@ function App() {
                 <Link to="/show_polls">Show</Link>
                 <Link to="/about">About</Link>
                 <Link to="/contact_us">Contact Us</Link>
-                <Link to="/charts">Charts</Link>
+                <Link to="/chart">Chart</Link>
             </div>
 
             <Routes>
@@ -176,7 +176,7 @@ function App() {
                 <Route path='/show_polls' exact element={<ShowPolls/>}/>
                 <Route path='/about' exact element={<About/>}/>
                 <Route path='/contact_us' exact element={<ContactUs/>}/>
-                <Route path='/charts' exact element={<Charts/>}/>
+                <Route path='/chart' exact element={<Chart/>}/>
             </Routes>
         </Router>
 
@@ -202,7 +202,7 @@ function App() {
             <Link to="/show_polls">Show</Link>
             <Link to="/about">About</Link>
             <Link to="/contact_us">Contact Us</Link>
-            <Link to="/charts">Charts</Link>
+            <Link to="/chart">Chart</Link>
         </div>
 
         <Routes>
@@ -212,7 +212,7 @@ function App() {
             <Route path='/show_polls' exact element={<ShowPolls/>}/>
             <Route path='/about' exact element={<About/>}/>
             <Route path='/contact_us' exact element={<ContactUs/>}/>
-            <Route path='/charts' exact element={<Charts/>}/>
+            <Route path='/chart' exact element={<Chart/>}/>
         </Routes>
     </Router>
 

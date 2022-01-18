@@ -9,6 +9,10 @@ html{
   font-size: 100%;
 }
 
+#chartdiv{
+    width: "60%";
+    height: "450px"
+}
 
 h1 {
   color: #FFD700;
