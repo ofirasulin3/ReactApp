@@ -7,12 +7,14 @@ function ShowPolls() {
     const [pollWasChosen, setPollWasChosen] = useState(0);
     const [questionWasChosen, setQuestionWasChosen] = useState(0);
     const [questions_options, set_questions_options] = useState([]);
+    const [filter_poll, set_filter_poll] = useState();
+    const [filter_question, set_filter_question] = useState();
 
     //const [poll_name, setPoll_name] = useState();
-    let filter_poll = '1';
-    let filter_question = '1';
-    const { selectedOption } = filter_poll;
-    const { selectedQuestion } = filter_question;
+    //let filter_poll = '1';
+    //let filter_question = '1';
+    const { selectedOption } = '1';
+    const { selectedQuestion } ='1';
 
     /*const options = [
       {value: '1', label: '1'},
@@ -22,18 +24,21 @@ function ShowPolls() {
     ];*/
 
     const handleChange = selectedOption => {
-       filter_poll = selectedOption.value;
+       //filter_poll = selectedOption.value;
+       set_filter_poll(selectedOption.value);
     };
 
     const handleQuestionChange = selectedQuestion => {
-       filter_question = selectedQuestion.value;
+       //filter_question = selectedQuestion.value;
+       set_filter_question(selectedQuestion.value);
     };
 
     const choosePollClicked = async e => {
         console.log("send poll button clicked");
         e.preventDefault();
 
-        if(filter_poll==='1'){
+        //if(filter_poll==='1'){
+        if(!filter_poll){
             alert("You have to select a poll.");
             return;
         } else{
@@ -89,7 +94,8 @@ function ShowPolls() {
         console.log("show question button clicked");
         e.preventDefault();
 
-        if(filter_question==='1'){
+        //if(filter_question==='1'){
+        if(!filter_question){
             alert("You have to select a question.");
             return;
         } else{
