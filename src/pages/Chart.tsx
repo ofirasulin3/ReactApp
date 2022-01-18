@@ -1,24 +1,35 @@
  import React, { useState } from "react";
  import { useEffect } from "react";
+ import { Component } from "react";
  import * as am5 from "@amcharts/amcharts5";
  import * as am5xy from "@amcharts/amcharts5/xy";
  import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
- //class Chart extends Componens {
- function Chart(props) {
-   //componentDidMount() {
-   const [answers, setAnswers] = useState([]);
+ class Chart extends Component {
 
-   const chart_div = () => {
+    constructor(props) {
+        super(props);
+        this.state = {
+            answers: []
+        };
+        //this.handleStatusChange = this.handleStatusChange.bind(this);
+      }
+        //const [answers, setAnswers] = useState([]);
+
+
+ //function Chart(props) {
+   componentDidMount() {
+
+   /*const chart_div = () => {
        return (
             <div id="chartdiv" style={{ width: "100%", height: "440px" }}></div>
          );
-   }
+   }*/
 
-   let root = am5.Root.new("chartdiv");
+   //let root = am5.Root.new("chartdiv");
 
 
-   useEffect(() => {
+   //useEffect(() => {
     let poll_name = props.poll_name;
     let question_name = props.question_name;
 
@@ -69,7 +80,12 @@
             })
           })
           console.log('questions', arr_options);
-          setAnswers(arr_answers);
+          //setAnswers(arr_answers);
+
+          this.setState({
+                 answers: arr_answers
+          });
+
        });
 
 
@@ -149,24 +165,23 @@
      chart.set("cursor", am5xy.XYCursor.new(root, {}));
 
      this.root = root;
-   })
+   }
 
 
 
-   /*componentWillUnmount() {
+   componentWillUnmount() {
      if (this.root) {
        this.root.dispose();
      }
-   }*/
+   }
 
-   //render() {
+   render() {
 
      //<div id="chartdiv" style={{ width: "60%", height: "450px" }}></div>
-        /*return (
+        return (
             <div id="chartdiv" style={{ width: "100%", height: "440px" }}></div>
-         );*/
-        return chart_div();
-   //}
+         );
+   }
 
 
  }
