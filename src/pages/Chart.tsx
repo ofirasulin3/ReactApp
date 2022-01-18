@@ -1,4 +1,5 @@
- import React from "react";
+ import React, { useState } from "react";
+ import { useEffect } from "react";
  import * as am5 from "@amcharts/amcharts5";
  import * as am5xy from "@amcharts/amcharts5/xy";
  import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
@@ -7,6 +8,14 @@
  function Chart(props) {
    //componentDidMount() {
    const [answers, setAnswers] = useState([]);
+
+   const chart_div = () => {
+       return (
+            <div id="chartdiv" style={{ width: "100%", height: "440px" }}></div>
+         );
+   }
+
+   let root = am5.Root.new("chartdiv");
 
 
    useEffect(() => {
@@ -63,7 +72,6 @@
           setAnswers(arr_answers);
        });
 
-     let root = am5.Root.new("chartdiv");
 
      root.setThemes([am5themes_Animated.new(root)]);
 
@@ -152,11 +160,12 @@
    }*/
 
    //render() {
-     //<div id="chartdiv" style={{ width: "60%", height: "450px" }}></div>
-        return (
-            <div id="chartdiv" style={{ width: "100%", height: "440px" }}></div>
-         );
 
+     //<div id="chartdiv" style={{ width: "60%", height: "450px" }}></div>
+        /*return (
+            <div id="chartdiv" style={{ width: "100%", height: "440px" }}></div>
+         );*/
+        return chart_div();
    //}
 
 
