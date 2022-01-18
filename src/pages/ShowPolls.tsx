@@ -97,8 +97,8 @@ function ShowPolls() {
             console.log("chosen question is:", filter_question);
         }
 
-        //send a request to the route that will activate the poll and send it to users
-        fetch('http://127.0.0.1:5000/activate_poll',
+        /*//send a request to the route that will activate the poll and send it to users
+        fetch('http://127.0.0.1:5000/show_poll',
                 {
                    method: 'GET',
                    headers:
@@ -124,12 +124,26 @@ function ShowPolls() {
         setPollWasChosen(1);
         //setChose(0);
         //setPoll_name();
-        //setChose(1-chose);
+        //setChose(1-chose);*/
     }
 
     const FormHeader = props => (
         <h2 id="headerTitle">{props.title}</h2>
     );
+
+    class ChartComponent extends React.Component {
+        render() {
+
+            return (
+                <div id="chartfatherdiv">
+                   <h2 id="transparent_h2">Number of votes per answer: Number of votes per answer:</h2>
+                   <Chart poll_name={filter_poll} question_name={filter_question} />
+                </div>
+            )
+
+        }
+
+    }
 
     class ShowPollsForm extends React.Component{
         state = {
@@ -260,10 +274,9 @@ function ShowPolls() {
       { questionWasChosen === 0 ?
             <ShowPollsForm />
        :
-           <div id="chartfatherdiv">
-               <h2 id="transparent_h2">Number of votes per answer: Number of votes per answer:</h2>
-               <Chart poll_name={filter_poll} question_name={filter_question} />
-           </div>
+
+          <ChartComponent />
+
       }
 
     </div>

@@ -26,12 +26,9 @@
          );
    }*/
 
-   //let root = am5.Root.new("chartdiv");
-
-
    //useEffect(() => {
-    let poll_name = props.poll_name;
-    let question_name = props.question_name;
+    let poll_name = this.props.poll_name;
+    let question_name = this.props.question_name;
 
     /*fetch(url)
      .then(resp => resp.json())
@@ -88,6 +85,7 @@
 
        });
 
+     let root = am5.Root.new("chartdiv");
 
      root.setThemes([am5themes_Animated.new(root)]);
 
@@ -132,7 +130,7 @@
          categoryField: "answer"
        })
      );
-     xAxis.data.setAll(answers);
+     xAxis.data.setAll(this.state.answers);
 
      // Create series
      let series1 = chart.series.push(
@@ -144,7 +142,7 @@
          categoryXField: "answer"
        })
      );
-     series1.data.setAll(answers);
+     series1.data.setAll(this.state.answers);
 
      /*let series2 = chart.series.push(
        am5xy.ColumnSeries.new(root, {
