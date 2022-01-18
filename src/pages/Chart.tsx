@@ -5,12 +5,14 @@
  import * as am5xy from "@amcharts/amcharts5/xy";
  import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
- class Chart extends Component {
+ class Chart extends Component <{}, { answers: any[], filled: any }> {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            answers: []
+            answers: [],
+            filled: 0,
         };
         //this.handleStatusChange = this.handleStatusChange.bind(this);
       }
@@ -29,6 +31,7 @@
    //useEffect(() => {
     let poll_name = this.props.poll_name;
     let question_name = this.props.question_name;
+    let question_votes = this.props.question_votes;
 
     /*fetch(url)
      .then(resp => resp.json())
@@ -68,21 +71,33 @@
 
           let arr_answers = [];
           /*for(let i = 0; i< data.length; i++){
-              arr_options.push({value: data[i], label: data[i]});
+              arr_answers.push({answer: data[i].first, votes: data[i]});
           }*/
+          Object.entries(data)
+              .map( ([key, value]) =>  arr_answers.push({answer: key, votes : value}) );
 
-          data.map(row=>{
+
+          /*data.map(row=>{
             Object.keys(row).map(key=>{
               arr_answers.push({answer: key, votes : row[key]})
             })
-          })
-          console.log('questions', arr_options);
+          })*/
+          console.log('answers:', arr_answers);
           //setAnswers(arr_answers);
 
           this.setState({
                  answers: arr_answers
           });
-
+          console.log('this.state.answers before:', this.state.answers);
+          console.log('this.state.filled before:', this.state.filled);
+          this.setState({
+                 filled: 1-this.state.filled
+          });
+          console.log('this.state.filled after:', this.state.filled);
+          console.log('this.state.answers after:', this.state.answers);
+          this.setState({
+                 answers: arr_answers
+          });
        });
 
      let root = am5.Root.new("chartdiv");
@@ -97,7 +112,7 @@
      );
 
      //Define data
-     /*let data2 = [
+     let data2 = [
        {
          answer: "answer1",//answer 1
          votes: 3000
@@ -114,7 +129,10 @@
          answer: "answer4", //answer 4 optional
          votes: 850
        }
-     ];*/
+     ];
+     console.log("data2: ", data2);
+
+     console.log("this.state.answers: (inside root)", this.state.answers);
 
      // Create Y-axis
      let yAxis = chart.yAxes.push(
@@ -132,10 +150,12 @@
      );
      xAxis.data.setAll(this.state.answers);
 
+     //xAxis.data.setAll(data2);
+
      // Create series
      let series1 = chart.series.push(
        am5xy.ColumnSeries.new(root, {
-         name: "Question",
+         name: question_name,
          xAxis: xAxis,
          yAxis: yAxis,
          valueYField: "votes",
@@ -143,6 +163,7 @@
        })
      );
      series1.data.setAll(this.state.answers);
+     //series1.data.setAll(data2);
 
      /*let series2 = chart.series.push(
        am5xy.ColumnSeries.new(root, {

@@ -9,6 +9,7 @@ function ShowPolls() {
     const [questions_options, set_questions_options] = useState([]);
     const [filter_poll, set_filter_poll] = useState();
     const [filter_question, set_filter_question] = useState();
+    const [filter_votes, set_filter_votes] = useState([]);
 
     //const [poll_name, setPoll_name] = useState();
     //let filter_poll = '1';
@@ -143,7 +144,7 @@ function ShowPolls() {
             return (
                 <div id="chartfatherdiv">
                    <h2 id="transparent_h2">Number of votes per answer: Number of votes per answer:</h2>
-                   <Chart poll_name={filter_poll} question_name={filter_question} />
+                   <Chart poll_name={filter_poll} question_name={filter_question} question_votes={filter_votes} />
                 </div>
             )
 
