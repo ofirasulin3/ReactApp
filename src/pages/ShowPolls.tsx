@@ -262,7 +262,7 @@ function ShowPolls() {
        :
            <div id="chartfatherdiv">
                <h2 id="transparent_h2">Number of votes per answer: Number of votes per answer:</h2>
-               <Chart/>
+               <Chart poll_name={filter_poll} question_name={filter_question} />
            </div>
       }
 

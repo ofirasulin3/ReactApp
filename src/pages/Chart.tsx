@@ -1,10 +1,68 @@
- import React, { Component } from "react";
+ import React from "react";
  import * as am5 from "@amcharts/amcharts5";
  import * as am5xy from "@amcharts/amcharts5/xy";
  import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
- class Chart extends Component {
-   componentDidMount() {
+ //class Chart extends Componens {
+ function Chart(props) {
+   //componentDidMount() {
+   const [answers, setAnswers] = useState([]);
+
+
+   useEffect(() => {
+    let poll_name = props.poll_name;
+    let question_name = props.question_name;
+
+    /*fetch(url)
+     .then(resp => resp.json())
+     .then(data => this.setState());*/
+
+    console.log("poll_name to fetch is:", poll_name);
+    console.log("question_name to fetch is:", question_name);
+
+    fetch('http://127.0.0.1:5000/question_votes',
+        {
+            method: 'GET',
+            headers:
+            {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'poll_name': poll_name,
+                'question_name': question_name,
+            }
+        }
+    )
+    .then((response) => response.json())
+    /*.then((response) => {
+        console.log("response from flask is:", response);
+        //response.json();
+        console.log("json response is:", response.json());
+        //console.log("json response is:", response);
+    })*/
+     .then((data) => {
+      console.log("data is:", data);
+
+         /*this.setState(() => {
+             const ar = res.results;
+             return {
+                 admins: ar
+             }
+         })*/
+
+          let arr_answers = [];
+          /*for(let i = 0; i< data.length; i++){
+              arr_options.push({value: data[i], label: data[i]});
+          }*/
+
+          data.map(row=>{
+            Object.keys(row).map(key=>{
+              arr_answers.push({answer: key, votes : row[key]})
+            })
+          })
+          console.log('questions', arr_options);
+          setAnswers(arr_answers);
+       });
+
      let root = am5.Root.new("chartdiv");
 
      root.setThemes([am5themes_Animated.new(root)]);
@@ -17,7 +75,7 @@
      );
 
      //Define data
-     let data = [
+     /*let data2 = [
        {
          answer: "answer1",//answer 1
          votes: 3000
@@ -34,7 +92,7 @@
          answer: "answer4", //answer 4 optional
          votes: 850
        }
-     ];
+     ];*/
 
      // Create Y-axis
      let yAxis = chart.yAxes.push(
@@ -50,7 +108,7 @@
          categoryField: "answer"
        })
      );
-     xAxis.data.setAll(data);
+     xAxis.data.setAll(answers);
 
      // Create series
      let series1 = chart.series.push(
@@ -62,7 +120,7 @@
          categoryXField: "answer"
        })
      );
-     series1.data.setAll(data);
+     series1.data.setAll(answers);
 
      /*let series2 = chart.series.push(
        am5xy.ColumnSeries.new(root, {
@@ -83,22 +141,25 @@
      chart.set("cursor", am5xy.XYCursor.new(root, {}));
 
      this.root = root;
-   }
+   })
 
-   componentWillUnmount() {
+
+
+   /*componentWillUnmount() {
      if (this.root) {
        this.root.dispose();
      }
-   }
+   }*/
 
-   render() {
+   //render() {
      //<div id="chartdiv" style={{ width: "60%", height: "450px" }}></div>
-     return (
-        <div id="chartdiv" style={{ width: "100%", height: "440px" }}></div>
-    );
+        return (
+            <div id="chartdiv" style={{ width: "100%", height: "440px" }}></div>
+         );
+
+   //}
 
 
-   }
  }
 
  export default Chart;
