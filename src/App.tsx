@@ -164,7 +164,6 @@ function App() {
                 <Link to="/show_polls">Show</Link>
                 <Link to="/about">About</Link>
                 <Link to="/contact_us">Contact Us</Link>
-                <Link to="/chart">Charts</Link>
             </div>
 
             <Routes>
@@ -176,7 +175,6 @@ function App() {
                 <Route path='/show_polls' exact element={<ShowPolls/>}/>
                 <Route path='/about' exact element={<About/>}/>
                 <Route path='/contact_us' exact element={<ContactUs/>}/>
-                <Route path='/chart' exact element={<Chart/>}/>
             </Routes>
         </Router>
 
@@ -197,22 +195,20 @@ function App() {
     <Router>
         <div className="Links">
             <Link to="/">Login</Link>
-            <Link to="/create_new_poll">Create</Link>
+            {/*<Link to="/create_new_poll">Create</Link>
             <Link to="/send_poll">Send</Link>
-            <Link to="/show_polls">Show</Link>
+            <Link to="/show_polls">Show</Link>*/}
             <Link to="/about">About</Link>
             <Link to="/contact_us">Contact Us</Link>
-            <Link to="/chart">Chart</Link>
         </div>
 
         <Routes>
             <Route path='/' exact element={<Login/>} />
-            <Route path='/create_new_poll' exact element={<CreatePoll/>}/>
+            {/*<Route path='/create_new_poll' exact element={<CreatePoll/>}/>
             <Route path='/send_poll' exact element={<SendPoll/>}/>
-            <Route path='/show_polls' exact element={<ShowPolls/>}/>
+            <Route path='/show_polls' exact element={<ShowPolls/>}/>*/}
             <Route path='/about' exact element={<About/>}/>
             <Route path='/contact_us' exact element={<ContactUs/>}/>
-            <Route path='/chart' exact element={<Chart/>}/>
         </Routes>
     </Router>
 
