@@ -104,6 +104,53 @@ function ShowPolls() {
             console.log("chosen question is:", filter_question);
         }
 
+        fetch('http://127.0.0.1:5000/question_votes',
+        {
+            method: 'GET',
+            headers:
+            {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'poll_name': filter_poll,
+                'question_name': filter_question,
+            }
+        }
+    )
+    .then((response) => response.json())
+     .then((data) => {
+      console.log("data is:", data);
+
+          let arr_answers = [];
+          /*for(let i = 0; i< data.length; i++){
+              arr_answers.push({answer: data[i].first, votes: data[i]});
+          }*/
+          Object.entries(data)
+              .map( ([key, value]) =>  arr_answers.push({answer: key, votes : value}) );
+
+          /*data.map(row=>{
+            Object.keys(row).map(key=>{
+              arr_answers.push({answer: key, votes : row[key]})
+            })
+          })*/
+          console.log('answers:', arr_answers);
+          set_filter_votes(arr_answers);
+
+          /*this.setState({
+                 answers: arr_answers
+          });
+          console.log('this.state.answers before:', this.state.answers);
+          console.log('this.state.filled before:', this.state.filled);
+          this.setState({
+                 filled: 1-this.state.filled
+          });
+          console.log('this.state.filled after:', this.state.filled);
+          console.log('this.state.answers after:', this.state.answers);
+          this.setState({
+                 answers: arr_answers
+          });*/
+       });
+
+
         /*//send a request to the route that will activate the poll and send it to users
         fetch('http://127.0.0.1:5000/show_poll',
                 {

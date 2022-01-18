@@ -39,8 +39,9 @@
 
     console.log("poll_name to fetch is:", poll_name);
     console.log("question_name to fetch is:", question_name);
+    console.log("question_votes to fetch is:", question_votes);
 
-    fetch('http://127.0.0.1:5000/question_votes',
+    /*fetch('http://127.0.0.1:5000/question_votes',
         {
             method: 'GET',
             headers:
@@ -51,37 +52,14 @@
                 'question_name': question_name,
             }
         }
-    )
-    .then((response) => response.json())
-    /*.then((response) => {
-        console.log("response from flask is:", response);
-        //response.json();
-        console.log("json response is:", response.json());
-        //console.log("json response is:", response);
-    })*/
+    )*/
+    /*.then((response) => response.json())
      .then((data) => {
       console.log("data is:", data);
-
-         /*this.setState(() => {
-             const ar = res.results;
-             return {
-                 admins: ar
-             }
-         })*/
-
           let arr_answers = [];
-          /*for(let i = 0; i< data.length; i++){
-              arr_answers.push({answer: data[i].first, votes: data[i]});
-          }*/
           Object.entries(data)
               .map( ([key, value]) =>  arr_answers.push({answer: key, votes : value}) );
 
-
-          /*data.map(row=>{
-            Object.keys(row).map(key=>{
-              arr_answers.push({answer: key, votes : row[key]})
-            })
-          })*/
           console.log('answers:', arr_answers);
           //setAnswers(arr_answers);
 
@@ -98,7 +76,7 @@
           this.setState({
                  answers: arr_answers
           });
-       });
+       });*/
 
      let root = am5.Root.new("chartdiv");
 
@@ -148,7 +126,7 @@
          categoryField: "answer"
        })
      );
-     xAxis.data.setAll(this.state.answers);
+     xAxis.data.setAll(question_votes);
 
      //xAxis.data.setAll(data2);
 
@@ -162,7 +140,7 @@
          categoryXField: "answer"
        })
      );
-     series1.data.setAll(this.state.answers);
+     series1.data.setAll(question_votes);
      //series1.data.setAll(data2);
 
      /*let series2 = chart.series.push(
